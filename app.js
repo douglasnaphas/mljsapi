@@ -3,7 +3,7 @@ var os = require('os');
 var Configs = require('./Configs');
 var app = express();
 
-function addCors(req, res) {
+app.use(function(req, res, next) {
   res.set('Content-Type', 'application/json');
   res.set(
     'Access-Control-Allow-Origin',
@@ -14,10 +14,10 @@ function addCors(req, res) {
       ? req.get('origin')
       : Configs.allowedOrigin()
   );
-}
+  next();
+});
 
 app.get('/', function(req, res) {
-  addCors(req, res);
   res.send({
     Output:
       'Hello World!!' +
@@ -41,7 +41,6 @@ app.post('/', function(req, res) {
 });
 
 app.get('/public-endpoint', function(req, res) {
-  addCors(req, res);
   res.send({
     Output: 'this endpoint is public'
   });
