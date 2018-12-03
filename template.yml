@@ -41,7 +41,7 @@ Resources:
           Properties:
             Path: /
             Method: post
-  PublicEndpoint:
+  ProtectedEndpoint:
     Type: AWS::Serverless::Function
     Properties:
       Handler: index.handler
@@ -58,7 +58,7 @@ Resources:
           Properties:
             Path: /protected-endpoint
             Method: get
-  ProtectedEndpoint:
+  PublicEndpoint:
     Type: AWS::Serverless::Function
     Properties:
       Handler: index.handler
