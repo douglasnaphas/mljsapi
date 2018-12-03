@@ -1,6 +1,6 @@
 var express = require('express');
 var os = require('os');
-var Configs = require('Configs');
+var Configs = require('./Configs');
 var app = express();
 
 function addCors(req, res) {
