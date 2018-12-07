@@ -1,0 +1,59 @@
+class JwtChecker {
+  constructor(jwk2Pem, jwt) {
+    this.jwk2Pem = jwk2Pem || require('jwk-to-pem');
+    this.jwt = jwt || require('jsonwebtoken');
+  }
+  /**
+   *
+   * @param {String} jot A JSON Web Token
+   * @param {Array} jwks Array of objects consumable by jwk-to-pem
+   * @return {Promise} A promise that resolves to the decoded token if jwt has
+   * a valid signature and is not expired, rejects otherwise
+   */
+  checkJwt(jot, jwks) {
+    if (!jot) {
+      return Promise.reject('bad jwt: ' + jot);
+    }
+    if (!jwks) {
+      return Promise.reject('bad JWKs: ' + jwks);
+    }
+    if (!Array.isArray(jwks)) {
+      return Promise.reject('bad JWKs, not an array: ' + jwks);
+    }
+    const decodedJot = this.jwt.decode(jot, { complete: true });
+    if (!decodedJot) {
+      return Promise.reject(
+        'could not decode JWT, tried and got: ' + decodedJot
+      );
+    }
+    if (!decodedJot.header) {
+      return Promise.reject('decoded JWT has no header: ' + decodedJot);
+    }
+    if (!decodedJot.payload) {
+      return Promise.reject('decoded JWT has no payload: ' + decodedJot);
+    }
+    if (!decodedJot.signature) {
+      return Promise.reject('decoded JWT has no signature: ' + decodedJot);
+    }
+    let jwkFound = false;
+    for (let i = 0; i < jwks.length; i++) {
+      if (decodedJot.header.kid && decodedJot.header.kid == jwks[i].kid) {
+        jwkFound = true;
+        break;
+      }
+    }
+    if (!jwkFound) {
+      return Promise.reject(
+        'JWT signing key not found in JWKs, signing key' +
+          ' is: ' +
+          decodedJot.header.kid
+      );
+    }
+
+    return new Promise((resolve, reject) => {
+      resolve(decodedJot);
+    });
+  }
+}
+
+module.exports = JwtChecker;

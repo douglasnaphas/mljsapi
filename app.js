@@ -52,5 +52,14 @@ app.get('/protected-endpoint', function(req, res) {
   });
 });
 
+// TODO: check the JWT and send cookies
+app.get(
+  '/get-cookies',
+  function(req, res, next) {
+    res.send({ Output: 'nothing' });
+  },
+  function() {}
+);
+
 // Export your Express configuration so that it can be consumed by the Lambda handler
 module.exports = app;
