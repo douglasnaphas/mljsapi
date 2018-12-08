@@ -36,9 +36,16 @@ class JwtChecker {
       return Promise.reject('decoded JWT has no signature: ' + decodedJot);
     }
     let jwkFound = false;
+    let jwk;
+    let jwkPem;
     for (let i = 0; i < jwks.length; i++) {
       if (decodedJot.header.kid && decodedJot.header.kid == jwks[i].kid) {
         jwkFound = true;
+        jwk = jwks[i];
+        jwkPem = this.jwk2Pem(jwk);
+        if (!jwkPem) {
+          return Promise.reject('could not parse JWK');
+        }
         break;
       }
     }
@@ -48,6 +55,11 @@ class JwtChecker {
           ' is: ' +
           decodedJot.header.kid
       );
+    }
+    try {
+      this.jwt.verify(jot, jwkPem, { algorithm: 'RS256' });
+    } catch (err) {
+      return Promise.reject(err.message || err);
     }
 
     return new Promise((resolve, reject) => {

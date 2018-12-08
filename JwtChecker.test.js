@@ -154,11 +154,70 @@ describe('checkJwt', () => {
       expect(err).toMatch(/JWT signing key not found in JWKs/);
     });
   });
-  test('unexpired JWT, invalid signature, key in JWKs', () => {});
-  test('unexpired JWT, invalid signature, no key in JWKs', () => {});
-  test('expired JWT, valid signature, key in JWKs', () => {});
-  test('expired JWT, valid signature, key not in JWKs', () => {});
-  test('expired JWT, invalid signature, key not in JWKs', () => {});
+  test('unexpired JWT, invalid signature, key in JWKs', () => {
+    // pretend the JWT is not expired
+    const mockJwt = {
+      verify: () => {
+        throw new Error('invalid signature');
+      },
+      decode: () => {
+        return decodedGoodIdToken;
+      }
+    };
+    const jwtChecker = new JwtChecker(jwk2Pem, mockJwt);
+    expect.assertions(1);
+    return jwtChecker.checkJwt(goodIdToken, goodJwks.keys).catch(err => {
+      expect(err).not.toBeNull();
+    });
+  });
+  test('unexpired JWT, invalid signature, no key in JWKs', () => {
+    // pretend the JWT is not expired
+    const mockJwt = {
+      verify: () => {
+        throw new Error('invalid signature');
+      },
+      decode: () => {
+        return decodedGoodIdToken;
+      }
+    };
+    const jwtChecker = new JwtChecker(jwk2Pem, mockJwt);
+    expect.assertions(1);
+    return jwtChecker.checkJwt(goodIdToken, badJwks.keys).catch(err => {
+      expect(err).not.toBeNull();
+    });
+  });
+  test('expired JWT, valid signature, key in JWKs', () => {
+    // pretend the JWT is not expired
+    const mockJwt = {
+      verify: () => {
+        throw new Error('maxAge exceeded');
+      },
+      decode: () => {
+        return decodedGoodIdToken;
+      }
+    };
+    const jwtChecker = new JwtChecker(jwk2Pem, mockJwt);
+    expect.assertions(1);
+    return jwtChecker.checkJwt(goodIdToken, goodJwks.keys).catch(err => {
+      expect(err).not.toBeNull();
+    });
+  });
+  test('expired JWT, key not in JWKs', () => {
+    // pretend the JWT is not expired
+    const mockJwt = {
+      verify: () => {
+        throw new Error('maxAge exceeded');
+      },
+      decode: () => {
+        return decodedGoodIdToken;
+      }
+    };
+    const jwtChecker = new JwtChecker(jwk2Pem, mockJwt);
+    expect.assertions(1);
+    return jwtChecker.checkJwt(goodIdToken, badJwks.keys).catch(err => {
+      expect(err).not.toBeNull();
+    });
+  });
   test('playground', () => {
     const key = new NodeRSA({ b: 512, e: 5 });
     key.setOptions({
