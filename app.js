@@ -2,6 +2,7 @@ var express = require('express');
 var os = require('os');
 var Configs = require('./Configs');
 var app = express();
+var credChecker = require('./lib/credChecker');
 
 app.use(function(req, res, next) {
   res.set('Content-Type', 'application/json');
@@ -15,6 +16,13 @@ app.use(function(req, res, next) {
       : Configs.allowedOrigin()
   );
   next();
+});
+
+// app.use(credChecker);
+
+app.options(/\/.*/, function(req, res) {
+  res.set('Access-Control-Allow-Headers', 'Authorization');
+  res.status(204).send();
 });
 
 app.get('/', function(req, res) {
@@ -60,6 +68,17 @@ app.get(
   },
   function() {}
 );
+
+app.get('/playground', function(req, res, next) {
+  let authHeader;
+  try {
+    authHeader = req.get('authorization');
+  } catch (err) {
+    authHeader = err.message || err;
+  }
+  authHeader = authHeader || 'no auth header';
+  res.send({ Authorization: authHeader });
+});
 
 // Export your Express configuration so that it can be consumed by the Lambda handler
 module.exports = app;

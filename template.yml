@@ -41,6 +41,11 @@ Resources:
           Properties:
             Path: /
             Method: post
+        OptionsEvent:
+          Type: Api
+          Properties:
+            Path: /
+            Method: options
   ProtectedEndpoint:
     Type: AWS::Serverless::Function
     Properties:
@@ -58,6 +63,11 @@ Resources:
           Properties:
             Path: /protected-endpoint
             Method: get
+        OptionsEvent:
+          Type: Api
+          Properties:
+            Path: /protected-endpoint
+            Method: options
   PublicEndpoint:
     Type: AWS::Serverless::Function
     Properties:
@@ -75,6 +85,11 @@ Resources:
           Properties:
             Path: /public-endpoint
             Method: get
+        OptionsEvent:
+          Type: Api
+          Properties:
+            Path: /public-endpoint
+            Method: options
   GetCookies:
     Type: AWS::Serverless::Function
     Properties:
@@ -92,3 +107,30 @@ Resources:
           Properties:
             Path: /get-cookies
             Method: get
+        OptionsEvent:
+          Type: Api
+          Properties:
+            Path: /get-cookies
+            Method: options
+  Playground:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: index.handler
+      Runtime: nodejs8.10
+      Environment:
+        Variables:
+          NODE_ENV: production
+      Role:
+        Fn::ImportValue:
+          !Join ['-', [!Ref 'ProjectId', !Ref 'AWS::Region', 'LambdaTrustRole']]
+      Events:
+        GetEvent:
+          Type: Api
+          Properties:
+            Path: /playground
+            Method: get
+        OptionsEvent:
+          Type: Api
+          Properties:
+            Path: /playground
+            Method: options

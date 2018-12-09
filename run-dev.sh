@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Use this to run a Lambda environment locally for development and teting.
+# Use this to run a Lambda environment locally for development and testing.
 # You need to install AWS's SAM CLI first.
 
 sed 's/NODE_ENV: production/NODE_ENV: development/' ./template.yml > ./dev-template.yml
