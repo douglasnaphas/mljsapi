@@ -37,7 +37,7 @@ app.get('/', function(req, res) {
     if (err) {
       console.log('***** error occurred describing table');
       console.log(err, err.stack);
-      res.send({ Output: 'error with dynamo call' });
+      res.send({ err: err, stack: err.stack });
     } // an error occurred
     else {
       console.log('###### successfully described table');
