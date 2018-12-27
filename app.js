@@ -67,5 +67,7 @@ app.get('/playground', function(req, res, next) {
   res.send({ Authorization: authHeader });
 });
 
+app.get('/code', function(req, res) {});
+
 // Export your Express configuration so that it can be consumed by the Lambda handler
 module.exports = app;
