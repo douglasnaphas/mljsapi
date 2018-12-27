@@ -4,6 +4,31 @@ Parameters:
     Description: AWS CodeStar projectID used to associate new resources to team members
     Type: String
 Resources:
+  GetCookies:
+    Properties:
+      Environment:
+        Variables:
+          NODE_ENV: development
+      Events:
+        GetEvent:
+          Properties:
+            Method: get
+            Path: /get-cookies
+          Type: Api
+        OptionsEvent:
+          Properties:
+            Method: options
+            Path: /get-cookies
+          Type: Api
+      Handler: index.handler
+      Role: !ImportValue
+        Fn::Join:
+          - '-'
+          - - !Ref 'ProjectId'
+            - !Ref 'AWS::Region'
+            - LambdaTrustRole
+      Runtime: nodejs8.10
+    Type: AWS::Serverless::Function
   HelloWorld:
     Properties:
       Environment:
@@ -14,6 +39,96 @@ Resources:
           Properties:
             Method: get
             Path: /
+          Type: Api
+        OptionsEvent:
+          Properties:
+            Method: options
+            Path: /
+          Type: Api
+        PostEvent:
+          Properties:
+            Method: post
+            Path: /
+          Type: Api
+      Handler: index.handler
+      Role: !ImportValue
+        Fn::Join:
+          - '-'
+          - - !Ref 'ProjectId'
+            - !Ref 'AWS::Region'
+            - LambdaTrustRole
+      Runtime: nodejs8.10
+    Type: AWS::Serverless::Function
+  Playground:
+    Properties:
+      Environment:
+        Variables:
+          NODE_ENV: development
+      Events:
+        GetEvent:
+          Properties:
+            Method: get
+            Path: /playground
+          Type: Api
+        OptionsEvent:
+          Properties:
+            Method: options
+            Path: /playground
+          Type: Api
+      Handler: index.handler
+      Role: !ImportValue
+        Fn::Join:
+          - '-'
+          - - !Ref 'ProjectId'
+            - !Ref 'AWS::Region'
+            - LambdaTrustRole
+      Runtime: nodejs8.10
+    Type: AWS::Serverless::Function
+  ProtectedEndpoint:
+    Properties:
+      Environment:
+        Variables:
+          NODE_ENV: development
+      Events:
+        GetEvent:
+          Properties:
+            Method: get
+            Path: /protected-endpoint
+          Type: Api
+        OptionsEvent:
+          Properties:
+            Method: options
+            Path: /protected-endpoint
+          Type: Api
+        PostEvent:
+          Properties:
+            Method: post
+            Path: /protected-endpoint
+          Type: Api
+      Handler: index.handler
+      Role: !ImportValue
+        Fn::Join:
+          - '-'
+          - - !Ref 'ProjectId'
+            - !Ref 'AWS::Region'
+            - LambdaTrustRole
+      Runtime: nodejs8.10
+    Type: AWS::Serverless::Function
+  PublicEndpoint:
+    Properties:
+      Environment:
+        Variables:
+          NODE_ENV: development
+      Events:
+        GetEvent:
+          Properties:
+            Method: get
+            Path: /public-endpoint
+          Type: Api
+        OptionsEvent:
+          Properties:
+            Method: options
+            Path: /public-endpoint
           Type: Api
       Handler: index.handler
       Role: !ImportValue
