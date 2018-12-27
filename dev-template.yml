@@ -51,6 +51,7 @@ Resources:
             Path: /
           Type: Api
       Handler: index.handler
+      Policies: AmazonDynamoDBFullAccess
       Role: !ImportValue
         Fn::Join:
           - '-'

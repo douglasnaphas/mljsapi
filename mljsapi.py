@@ -19,6 +19,7 @@ t.add_resource(
     Handler="index.handler",
     Runtime="nodejs8.10",
     CodeUri="this is not really required, as it is specified in buildspec.yml",
+    Policies="AmazonDynamoDBFullAccess",
     Environment=Environment(
       Variables={
         "NODE_ENV": "production"
