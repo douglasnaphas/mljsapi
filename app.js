@@ -3,6 +3,7 @@ var Configs = require('./Configs');
 var app = express();
 var credChecker = require('./lib/credChecker');
 var cookieParser = require('cookie-parser');
+const AWS = require('aws-sdk');
 
 app.use(function(req, res, next) {
   res.set('Content-Type', 'application/json');
@@ -28,9 +29,25 @@ app.options(/\/.*/, function(req, res) {
 });
 
 app.get('/', function(req, res) {
-  res.send({
-    Output: 'Hello World!!'
-  });
+  const dynamodb = new AWS.DynamoDB();
+  const params = {
+    TableName: 'seders'
+  };
+  dynamodb.describeTable(params, (err, data) => {
+    if (err) {
+      console.log('***** error occurred describing table');
+      console.log(err, err.stack);
+      res.send({ Output: 'error with dynamo call' });
+    } // an error occurred
+    else {
+      console.log('###### successfully described table');
+      console.log(data);
+      res.send({ Output: data });
+    }
+  }); // successful response
+  // res.send({
+  //   Output: 'Hello World!!'
+  // });
 });
 
 app.post('/', function(req, res) {
