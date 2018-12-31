@@ -1,6 +1,6 @@
 {
-  "name": "express-HelloWorld",
-  "description": "Hello World ExpressJS WebService",
+  "name": "mljsapi",
+  "description": "Mad Liberation JS API",
   "version": "0.0.1",
   "private": true,
   "dependencies": {
