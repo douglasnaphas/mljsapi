@@ -86,5 +86,10 @@ app.get('/playground', function(req, res, next) {
 
 app.get('/code', function(req, res) {});
 
+app.get('/scripts', function(req, res) {
+    const scripts = [];
+    res.send({scripts: scripts});
+});
+
 // Export your Express configuration so that it can be consumed by the Lambda handler
 module.exports = app;
