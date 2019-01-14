@@ -89,23 +89,14 @@ app.get('/code', function(req, res) {});
 app.get('/scripts', function(req, res) {
     const dynamodb = new AWS.DynamoDB({apiVersion: '2012-08-10'});
     const params = {
-      ExpressionAttributeValues: {
-        ':i': {N: '1'}
-      },
-      KeyConditionExpression: 'haggadah_id = :i',
-      ProjectionExpression: 'haggadah_id, haggadah_name, haggadah_description',
       TableName: 'haggadahs',
     };
     
-    dynamodb.query(params, (err, data) => {
+    dynamodb.scan(params, (err, data) => {
     if (err) {
-      console.log('***** error occurred describing table');
-      console.log(err, err.stack);
       res.send({ err: err, stack: err.stack });
     } // an error occurred
     else {
-      console.log('###### successfully described table');
-      console.log(data);
       res.send({ scripts: data });
     }
   });
