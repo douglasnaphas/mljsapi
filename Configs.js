@@ -1,5 +1,8 @@
 class Configs {
-  static allowedOrigin() {
+  static allowedOrigin(origin) {
+    if(/https:\/\/([^\/]+[.])?madliberationgame.com/.test(origin)) {
+      return origin;
+    }
     return 'https://madliberationgame.com';
   }
 

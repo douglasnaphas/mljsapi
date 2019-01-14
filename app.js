@@ -14,7 +14,7 @@ app.use(function(req, res, next) {
       process.env.NODE_ENV &&
       process.env.NODE_ENV === 'development'
       ? req.get('origin')
-      : Configs.allowedOrigin()
+      : Configs.allowedOrigin(req.get('origin'))
   );
   next();
 });
