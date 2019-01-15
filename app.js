@@ -95,7 +95,7 @@ app.get('/scripts', function(req, res) {
     dynamodb.scan(params, (err, data) => {
     if (err) {
       res.send({ err: err, stack: err.stack });
-    } // an error occurred
+    }
     else {
       res.send({ scripts: data });
     }
