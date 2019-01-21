@@ -103,7 +103,7 @@ app.get('/scripts', function(req, res) {
   });
 });
 
-app.post('/room-code', roomCode);
+app.post('/room-code', roomCode(AWS));
 
 // Export your Express configuration so that it can be consumed by the Lambda handler
 module.exports = app;
