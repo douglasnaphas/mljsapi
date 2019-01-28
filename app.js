@@ -1,3 +1,4 @@
+const bodyParser = require('body-parser');
 var express = require('express');
 var Configs = require('./Configs');
 var app = express();
@@ -27,6 +28,7 @@ app.use(cookieParser());
 
 app.options(/\/.*/, function(req, res) {
   res.set('Access-Control-Allow-Headers', 'Authorization');
+  res.set('Access-Control-Allow-Headers', 'Content-Type');
   res.status(204).send();
 });
 
@@ -46,10 +48,7 @@ app.get('/', function(req, res) {
       console.log(data);
       res.send({ Output: data });
     }
-  }); // successful response
-  // res.send({
-  //   Output: 'Hello World!!'
-  // });
+  });
 });
 
 app.post('/', function(req, res) {
@@ -103,6 +102,8 @@ app.get('/scripts', function(req, res) {
     }
   });
 });
+
+app.use(bodyParser.json());
 
 app.post('/room-code', roomCode(AWS, roomCodeGenerator));
 
