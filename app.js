@@ -5,6 +5,7 @@ var credChecker = require('./lib/credChecker');
 var cookieParser = require('cookie-parser');
 const AWS = require('aws-sdk');
 const roomCode = require('./lib/room-code');
+const roomCodeGenerator = require('./lib/roomCodeGenerator');
 
 app.use(function(req, res, next) {
   res.set('Content-Type', 'application/json');
@@ -103,7 +104,7 @@ app.get('/scripts', function(req, res) {
   });
 });
 
-app.post('/room-code', roomCode(AWS));
+app.post('/room-code', roomCode(AWS, roomCodeGenerator));
 
 // Export your Express configuration so that it can be consumed by the Lambda handler
 module.exports = app;
