@@ -105,6 +105,13 @@ app.get('/scripts', function(req, res) {
 
 app.use(bodyParser.json());
 
+app.use('/room-code', function(req, res, next) {
+  if(! req.body.path) {
+    res.status(400).send();
+  } else {
+    next();
+  }
+});
 app.post('/room-code', roomCode(AWS, roomCodeGenerator));
 
 // Export your Express configuration so that it can be consumed by the Lambda handler
