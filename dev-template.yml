@@ -60,6 +60,31 @@ Resources:
             - LambdaTrustRole
       Runtime: nodejs8.10
     Type: AWS::Serverless::Function
+  JoinSeder:
+    Properties:
+      Environment:
+        Variables:
+          NODE_ENV: development
+      Events:
+        OptionsEvent:
+          Properties:
+            Method: options
+            Path: /join-seder
+          Type: Api
+        PostEvent:
+          Properties:
+            Method: post
+            Path: /join-seder
+          Type: Api
+      Handler: index.handler
+      Role: !ImportValue
+        Fn::Join:
+          - '-'
+          - - !Ref 'ProjectId'
+            - !Ref 'AWS::Region'
+            - LambdaTrustRole
+      Runtime: nodejs8.10
+    Type: AWS::Serverless::Function
   Playground:
     Properties:
       Environment:

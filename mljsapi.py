@@ -233,6 +233,36 @@ t.add_resource(
   )
 )
 
+# join-seder
+t.add_resource(
+  Function(
+    "JoinSeder",
+    Handler="index.handler",
+    Runtime="nodejs8.10",
+    CodeUri="this is not really required, as it is specified in buildspec.yml",
+    Environment=Environment(
+      Variables={
+        "NODE_ENV": "production"
+      }
+    ),
+    Role=ImportValue(
+      Join("-", [Ref(projectid), Ref("AWS::Region"), "LambdaTrustRole"])
+    ),
+    Events={
+      "PostEvent": ApiEvent(
+        "PostEvent",
+        Path="/join-seder",
+        Method="post"
+      ),
+      "OptionsEvent": ApiEvent(
+        "OptionsEvent",
+        Path="/join-seder",
+        Method="options"
+      )
+    }
+  )
+)
+
 for line in t.to_yaml().splitlines():
   if not re.search(r'^\s*CodeUri:', line):
     print(line)
