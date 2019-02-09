@@ -112,7 +112,7 @@ app.use(bodyParser.json());
 app.use('/room-code', pathCheck());
 app.post('/room-code', roomCode(AWS, roomCodeGenerator));
 
-app.post('/join-seder', joinSeder(AWS));
+app.post('/join-seder', joinSeder(AWS, new Date(), Configs));
 
 // Export your Express configuration so that it can be consumed by the Lambda handler
 module.exports = app;
