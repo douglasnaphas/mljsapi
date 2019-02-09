@@ -12,6 +12,14 @@ class Configs {
       'well-known/jwks.json'
     );
   }
+  
+  /**
+   * @return {Number} The number of milliseconds allowed to elapse before a new
+   * seder cannot be joined.
+   */
+  static msToJoinSeder() {
+    return 1000 /* ms/s */ * 60 /* s/minute */ * 30 /* minutes */;
+  }
 }
 
 module.exports = Configs;
