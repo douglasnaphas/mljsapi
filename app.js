@@ -13,16 +13,17 @@ const roomCodeExists = require('./lib/roomCodeExists');
 const randomStringGenerator = require('./lib/roomCodeGenerator');
 
 app.use(function(req, res, next) {
-  res.set('Content-Type', 'application/json');
-  res.set(
-    'Access-Control-Allow-Origin',
-    process &&
+  res.set({
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': process &&
       process.env &&
       process.env.NODE_ENV &&
       process.env.NODE_ENV === 'development'
       ? req.get('origin')
-      : Configs.allowedOrigin(req.get('origin'))
-  );
+      : Configs.allowedOrigin(req.get('origin')),
+    'Access-Control-Allow-Headers': 'Authorization, Content-Type',
+    'Access-Control-Allow-Credentials': 'true'
+  });
   next();
 });
 
@@ -31,8 +32,6 @@ app.use(cookieParser());
 // app.use(credChecker({}));
 
 app.options(/\/.*/, function(req, res) {
-  res.set('Access-Control-Allow-Headers', 'Authorization');
-  res.set('Access-Control-Allow-Headers', 'Content-Type');
   res.status(204).send();
 });
 
