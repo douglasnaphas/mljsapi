@@ -28,6 +28,14 @@ class Configs {
   static msToFinishSeder() {
     return 1000 /* ms/s */ * 60 /* s/m */ * 60 /* m/h */ * 24 /* hours */;
   }
+  
+  /**
+   * @return {Number} The number of letters that should be in the value of the
+   * cookie sent to keep track of who has a Game Name for a Seder
+   */
+  static cookieValueLength() {
+    return 10;
+  }
 }
 
 module.exports = Configs;

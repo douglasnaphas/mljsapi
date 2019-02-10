@@ -10,7 +10,7 @@ const joinSeder = require('./lib/joinSeder');
 const pathCheck = require('./lib/pathCheck');
 const roomCode = require('./lib/room-code');
 const roomCodeExists = require('./lib/roomCodeExists');
-const roomCodeGenerator = require('./lib/roomCodeGenerator');
+const randomStringGenerator = require('./lib/roomCodeGenerator');
 
 app.use(function(req, res, next) {
   res.set('Content-Type', 'application/json');
@@ -110,9 +110,10 @@ app.get('/scripts', function(req, res) {
 app.use(bodyParser.json());
 
 app.use('/room-code', pathCheck());
-app.post('/room-code', roomCode(AWS, roomCodeGenerator));
+app.post('/room-code', roomCode(AWS, randomStringGenerator));
 
-app.post('/join-seder', joinSeder(AWS, new Date(), Configs));
+app.post('/join-seder', joinSeder(AWS, new Date(), Configs,
+  randomStringGenerator));
 
 // Export your Express configuration so that it can be consumed by the Lambda handler
 module.exports = app;
