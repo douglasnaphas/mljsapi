@@ -36,6 +36,14 @@ class Configs {
   static cookieValueLength() {
     return 10;
   }
+  
+  /**
+   * @return {String} A prefix for the name of the cookie sent for the Game
+   * Name, to ensure the cookie name does not conflict with anything
+   */
+   static gameNameCookiePrefix() {
+     return 'gamename'
+   };
 }
 
 module.exports = Configs;
