@@ -44,6 +44,10 @@ class Configs {
    static gameNameCookiePrefix() {
      return 'gamename'
    };
+   
+   static illegalGameNameCharacters() {
+     return [';', '=', '(', ')'];
+   }
 }
 
 module.exports = Configs;

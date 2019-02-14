@@ -11,6 +11,7 @@ const pathCheck = require('./lib/pathCheck');
 const roomCode = require('./lib/room-code');
 const roomCodeExists = require('./lib/roomCodeExists');
 const randomStringGenerator = require('./lib/roomCodeGenerator');
+const sanitizeGameName = require('./lib/sanitizeGameName');
 
 app.use(function(req, res, next) {
   res.set({
