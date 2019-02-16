@@ -121,7 +121,8 @@ app.post('/join-seder', [
 // the session key, conditioned on the row NOT existing, return the record(s)
 // before the update (probably UPDATED_OLD)
 
-const db = require('./lib/db');
+// const db = require('./lib/db');
+const db = require('./lib/dbPlayGetParticipants');
 app.post('/db', db);
 
 // Export your Express configuration so that it can be consumed by the Lambda handler
