@@ -48,6 +48,10 @@ class Configs {
    static illegalGameNameCharacters() {
      return [';', '=', '(', ')'];
    }
+   
+   static roomCodePattern() {
+     return /[A-Z]{6}/;
+   }
 }
 
 module.exports = Configs;
