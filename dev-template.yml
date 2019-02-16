@@ -4,6 +4,31 @@ Parameters:
     Description: AWS CodeStar projectID used to associate new resources to team members
     Type: String
 Resources:
+  DB:
+    Properties:
+      Environment:
+        Variables:
+          NODE_ENV: development
+      Events:
+        OptionsEvent:
+          Properties:
+            Method: options
+            Path: /db
+          Type: Api
+        PostEvent:
+          Properties:
+            Method: post
+            Path: /db
+          Type: Api
+      Handler: index.handler
+      Role: !ImportValue
+        Fn::Join:
+          - '-'
+          - - !Ref 'ProjectId'
+            - !Ref 'AWS::Region'
+            - LambdaTrustRole
+      Runtime: nodejs8.10
+    Type: AWS::Serverless::Function
   GetCookies:
     Properties:
       Environment:

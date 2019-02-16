@@ -116,6 +116,13 @@ app.post('/join-seder', [
   joinSeder(AWS, new Date(), Configs, randomStringGenerator),
   (req, res) => {res.send();}
   ]);
+// TODO: db transaction: add participant to the seder row's participants set
+// if the room_code exists, add a participant row (lib_id: participant#) with
+// the session key, conditioned on the row NOT existing, return the record(s)
+// before the update (probably UPDATED_OLD)
+
+const db = require('./lib/db');
+app.post('/db', db);
 
 // Export your Express configuration so that it can be consumed by the Lambda handler
 module.exports = app;
