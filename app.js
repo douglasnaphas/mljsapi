@@ -117,8 +117,8 @@ app.post('/join-seder', [
   (req, res) => {res.send();}
   ]);
 
-// const db = require('./lib/db');
-const db = require('./lib/dbPlayGetParticipants');
+const db = require('./lib/db');
+// const db = require('./lib/dbPlayGetParticipants');
 app.post('/db', db);
 
 // Export your Express configuration so that it can be consumed by the Lambda handler
