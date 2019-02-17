@@ -10,7 +10,7 @@ const joinSeder = require('./lib/joinSeder');
 const pathCheck = require('./lib/pathCheck');
 const roomCode = require('./lib/room-code');
 const roomCodeExists = require('./lib/roomCodeExists');
-const randomStringGenerator = require('./lib/roomCodeGenerator');
+const randomStringGenerator = require('./lib/randomCapGenerator');
 const sanitizeGameName = require('./lib/sanitizeGameName');
 
 app.use(function(req, res, next) {
