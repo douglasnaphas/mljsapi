@@ -18,7 +18,9 @@ const schema = {
   // attribute names
   // scripts
   // seders
-  CREATED: 'created'
+  CREATED: 'created',
+  // participants
+  SESSION_KEY: 'session_key'
   
 }
 
