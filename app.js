@@ -112,10 +112,9 @@ app.use(bodyParser.json());
 app.use('/room-code', pathCheck());
 app.post('/room-code', roomCode(AWS, randomStringGenerator));
 
-app.post('/join-seder', [
-  joinSeder(AWS, new Date(), Configs, randomStringGenerator),
-  (req, res) => {res.send();}
-  ]);
+const joinSederMiddleware =
+  require('./lib/joinSederMiddleware/joinSederMiddleware.js');
+app.post('/join-seder', joinSederMiddleware);
 
 const db = require('./lib/db');
 // const db = require('./lib/dbPlayGetParticipants');
