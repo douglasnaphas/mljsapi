@@ -12,6 +12,7 @@ const roomCode = require('./lib/room-code');
 const roomCodeExists = require('./lib/roomCodeExists');
 const randomStringGenerator = require('./lib/randomCapGenerator');
 const sanitizeGameName = require('./lib/sanitizeGameName');
+const schema = require('./schema');
 
 app.use(function(req, res, next) {
   res.set({
@@ -91,20 +92,28 @@ app.get('/playground', function(req, res, next) {
 
 app.get('/code', function(req, res) {});
 
-app.get('/scripts', function(req, res) {
-    const dynamodb = new AWS.DynamoDB({apiVersion: '2012-08-10'});
-    const params = {
-      TableName: 'haggadahs',
-    };
-    
-    dynamodb.scan(params, (err, data) => {
-    if (err) {
-      res.send({ err: err, stack: err.stack });
-    }
-    else {
-      res.send({ scripts: data });
-    }
+app.get('/scripts', async function(req, res) {
+  const params = {
+    TableName: schema.TABLE_NAME,
+    IndexName: schema.SCRIPTS_INDEX,
+    ExpressionAttributeNames: {
+      '#IS': schema.SCRIPTS_PART_KEY
+    },
+    ExpressionAttributeValues: {
+      ':is': 1
+    },
+    KeyConditionExpression: '#IS = :is'
+  };
+  const dynamodb = new AWS.DynamoDB.DocumentClient();
+  const dbResponse = await new Promise((resolve, reject) => {
+    dynamodb.query(params, (err, data) => {
+      resolve({err: err, data: data});
+    });
   });
+  if(dbResponse.err) {
+    return res.status(500).send({err: dbResponse.err});
+  }
+  return res.send({scripts: dbResponse.data});
 });
 
 app.use(bodyParser.json());
@@ -116,9 +125,11 @@ const joinSederMiddleware =
   require('./lib/joinSederMiddleware/joinSederMiddleware.js');
 app.post('/join-seder', joinSederMiddleware);
 
-const db = require('./lib/db');
+// const db = require('./lib/db');
 // const db = require('./lib/dbPlayGetParticipants');
+const db = require('./lib/dbPlayGetScripts');
 app.post('/db', db);
+
 
 // Export your Express configuration so that it can be consumed by the Lambda handler
 module.exports = app;
