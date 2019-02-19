@@ -34,7 +34,7 @@ class Configs {
    * cookie sent to keep track of who has a Game Name for a Seder
    */
   static cookieValueLength() {
-    return 10;
+    return 30;
   }
   
   /**
