@@ -13,6 +13,7 @@ const roomCodeExists = require('./lib/roomCodeExists');
 const randomStringGenerator = require('./lib/randomCapGenerator');
 const sanitizeGameName = require('./lib/sanitizeGameName');
 const schema = require('./schema');
+const blacklistPostParams = require('./lib/blacklistPostParams');
 
 app.use(function(req, res, next) {
   res.set({
@@ -117,6 +118,8 @@ app.get('/scripts', async function(req, res) {
 });
 
 app.use(bodyParser.json());
+
+app.use(blacklistPostParams);
 
 app.use('/room-code', pathCheck());
 app.post('/room-code', roomCode(AWS, randomStringGenerator));

@@ -52,6 +52,18 @@ class Configs {
    static roomCodePattern() {
      return /[A-Z]{6}/;
    }
+   
+   static roomCodeBlacklist() {
+     return /[^A-Z]/g;
+   }
+   
+  static gameNameBlacklist() {
+    return /[^-A-Za-z ,0-9]/g;
+  }
+
+  static libBlacklist() {
+    return /[^-A-Za-z ,0-9."'?!/]/g;
+  }
 }
 
 module.exports = Configs;
