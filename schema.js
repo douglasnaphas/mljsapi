@@ -28,8 +28,8 @@ const schema = {
   // seders
   CREATED: 'created',
   // participants
-  SESSION_KEY: 'session_key'
-  
+  SESSION_KEY: 'session_key',
+  GAME_NAME: 'game_name'
 }
 
 module.exports = schema;
