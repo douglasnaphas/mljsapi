@@ -128,6 +128,8 @@ const joinSederMiddleware =
   require('./lib/joinSederMiddleware/joinSederMiddleware.js');
 app.post('/join-seder', joinSederMiddleware);
 
+const rosterMiddleware = require('./lib/rosterMiddleware/rosterMiddleware.js');
+
 // const db = require('./lib/db');
 // const db = require('./lib/dbPlayGetParticipants');
 const db = require('./lib/dbPlayGetScripts');
