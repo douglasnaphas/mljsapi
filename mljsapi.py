@@ -279,6 +279,11 @@ t.add_resource(
       Join("-", [Ref(projectid), Ref("AWS::Region"), "LambdaTrustRole"])
     ),
     Events={
+      "GetEvent": ApiEvent(
+        "GetEvent",
+        Path="/db",
+        Method="get"
+      ),
       "PostEvent": ApiEvent(
         "PostEvent",
         Path="/db",

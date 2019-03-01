@@ -129,11 +129,13 @@ const joinSederMiddleware =
 app.post('/join-seder', joinSederMiddleware);
 
 const rosterMiddleware = require('./lib/rosterMiddleware/rosterMiddleware.js');
+app.get('/roster', rosterMiddleware);
 
 // const db = require('./lib/db');
-// const db = require('./lib/dbPlayGetParticipants');
-const db = require('./lib/dbPlayGetScripts');
+const db = require('./lib/dbPlayGetParticipants');
+// const db = require('./lib/dbPlayGetScripts');
 app.post('/db', db);
+app.get('/db', db);
 
 
 // Export your Express configuration so that it can be consumed by the Lambda handler
