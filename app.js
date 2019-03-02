@@ -11,7 +11,6 @@ const pathCheck = require('./lib/pathCheck');
 const roomCode = require('./lib/room-code');
 const roomCodeExists = require('./lib/roomCodeExists');
 const randomStringGenerator = require('./lib/randomCapGenerator');
-const sanitizeGameName = require('./lib/sanitizeGameName');
 const schema = require('./schema');
 const blacklistPostParams = require('./lib/blacklistPostParams');
 
