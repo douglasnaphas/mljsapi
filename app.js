@@ -13,6 +13,8 @@ const roomCodeExists = require('./lib/roomCodeExists');
 const randomStringGenerator = require('./lib/randomCapGenerator');
 const schema = require('./schema');
 const blacklistPostParams = require('./lib/blacklistPostParams');
+const gameNameCookieCheckMidWare =
+  require('./lib/gameNameCookieCheckMidWare/gameNameCookieCheckMidWare.js');
 
 app.use(function(req, res, next) {
   res.set({
@@ -128,7 +130,7 @@ const joinSederMiddleware =
 app.post('/join-seder', joinSederMiddleware);
 
 const rosterMiddleware = require('./lib/rosterMiddleware/rosterMiddleware.js');
-app.get('/roster', rosterMiddleware);
+app.get('/roster', gameNameCookieCheckMidWare, rosterMiddleware);
 
 // const db = require('./lib/db');
 const db = require('./lib/dbPlayGetParticipants');
