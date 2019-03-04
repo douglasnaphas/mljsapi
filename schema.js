@@ -27,6 +27,7 @@ const schema = {
   SCRIPT_NUMBER: 'script_number',
   // seders
   CREATED: 'created',
+  CLOSED: 'closed',
   // participants
   SESSION_KEY: 'session_key',
   GAME_NAME: 'game_name'
