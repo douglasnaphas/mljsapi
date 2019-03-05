@@ -4,6 +4,31 @@ Parameters:
     Description: AWS CodeStar projectID used to associate new resources to team members
     Type: String
 Resources:
+  CloseSeder:
+    Properties:
+      Environment:
+        Variables:
+          NODE_ENV: production
+      Events:
+        OptionsEvent:
+          Properties:
+            Method: options
+            Path: /close-seder
+          Type: Api
+        PostEvent:
+          Properties:
+            Method: post
+            Path: /close-seder
+          Type: Api
+      Handler: index.handler
+      Role: !ImportValue
+        Fn::Join:
+          - '-'
+          - - !Ref 'ProjectId'
+            - !Ref 'AWS::Region'
+            - LambdaTrustRole
+      Runtime: nodejs8.10
+    Type: AWS::Serverless::Function
   DB:
     Properties:
       Environment:
