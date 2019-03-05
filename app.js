@@ -133,8 +133,9 @@ const rosterMiddleware = require('./lib/rosterMiddleware/rosterMiddleware.js');
 app.get('/roster', gameNameCookieCheckMidWare, rosterMiddleware);
 
 // const db = require('./lib/db');
-const db = require('./lib/dbPlayGetParticipants');
+// const db = require('./lib/dbPlayGetParticipants');
 // const db = require('./lib/dbPlayGetScripts');
+const db = require('./lib/dbPlayCloseSeder');
 app.post('/db', db);
 app.get('/db', db);
 
