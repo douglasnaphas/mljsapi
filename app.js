@@ -15,6 +15,7 @@ const schema = require('./schema');
 const blacklistPostParams = require('./lib/blacklistPostParams');
 const gameNameCookieCheckMidWare =
   require('./lib/gameNameCookieCheckMidWare/gameNameCookieCheckMidWare.js');
+const responses = require('./responses');
 
 app.use(function(req, res, next) {
   res.set({
@@ -134,7 +135,8 @@ app.get('/roster', gameNameCookieCheckMidWare, rosterMiddleware);
 
 const closeSederMiddleware =
   require('./lib/closeSederMiddleware/closeSederMiddleware.js');
-app.post('/close-seder', gameNameCookieCheckMidWare, closeSederMiddleware);
+app.post('/close-seder', gameNameCookieCheckMidWare, closeSederMiddleware,
+  (req, res) => {res.send(responses.success())});
 
 // const db = require('./lib/db');
 // const db = require('./lib/dbPlayGetParticipants');
