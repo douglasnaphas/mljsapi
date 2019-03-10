@@ -11,7 +11,8 @@ const api = {
   },
   POST_BODY_PARAMS: {
     ROOM_CODE: 'roomCode',
-    GAME_NAME: 'gameName'
+    GAME_NAME: 'gameName',
+    PATH: 'path'
   }
 };
 module.exports = api;
