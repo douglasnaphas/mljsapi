@@ -16,6 +16,8 @@ const blacklistPostParams = require('./lib/blacklistPostParams');
 const gameNameCookieCheckMidWare =
   require('./lib/gameNameCookieCheckMidWare/gameNameCookieCheckMidWare.js');
 const responses = require('./responses');
+const assignLibsMiddleware =
+  require('./lib/assignLibsMiddleware/assignLibsMiddleware.js');
 
 app.use(function(req, res, next) {
   res.set({
@@ -144,6 +146,9 @@ app.post('/close-seder', gameNameCookieCheckMidWare, closeSederMiddleware,
 const db = require('./lib/dbPlayCloseSeder');
 app.post('/db', db);
 app.get('/db', db);
+
+app.post('/play', assignLibsMiddleware, (req, res) => {res.send()});
+app.get('/play', assignLibsMiddleware, (req, res) => {res.send()});
 
 
 // Export your Express configuration so that it can be consumed by the Lambda handler

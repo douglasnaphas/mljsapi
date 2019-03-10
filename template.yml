@@ -140,6 +140,36 @@ Resources:
             - LambdaTrustRole
       Runtime: nodejs8.10
     Type: AWS::Serverless::Function
+  Play:
+    Properties:
+      Environment:
+        Variables:
+          NODE_ENV: production
+      Events:
+        GetEvent:
+          Properties:
+            Method: get
+            Path: /play
+          Type: Api
+        OptionsEvent:
+          Properties:
+            Method: options
+            Path: /play
+          Type: Api
+        PostEvent:
+          Properties:
+            Method: post
+            Path: /play
+          Type: Api
+      Handler: index.handler
+      Role: !ImportValue
+        Fn::Join:
+          - '-'
+          - - !Ref 'ProjectId'
+            - !Ref 'AWS::Region'
+            - LambdaTrustRole
+      Runtime: nodejs8.10
+    Type: AWS::Serverless::Function
   Playground:
     Properties:
       Environment:
