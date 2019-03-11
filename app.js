@@ -135,10 +135,10 @@ app.post('/join-seder', joinSederMiddleware);
 const rosterMiddleware = require('./lib/rosterMiddleware/rosterMiddleware.js');
 app.get('/roster', gameNameCookieCheckMidWare, rosterMiddleware);
 
-// const closeSederMiddleware =
-//   require('./lib/closeSederMiddleware/closeSederMiddleware.js');
-// app.post('/close-seder', gameNameCookieCheckMidWare/*, closeSederMiddleware*/);
-//   /*(req, res) => {res.send(responses.success())})*/;
+const closeSederMiddleware =
+  require('./lib/closeSederMiddleware/closeSederMiddleware.js');
+app.post('/close-seder', gameNameCookieCheckMidWare, closeSederMiddleware,
+  (req, res) => {res.send(responses.success())});
 
 // const db = require('./lib/db');
 // const db = require('./lib/dbPlayGetParticipants');
@@ -147,7 +147,8 @@ const db = require('./lib/dbPlayCloseSeder');
 app.post('/db', db);
 app.get('/db', db);
 
-app.post('/play', assignLibsMiddleware, (req, res) => {res.send()});
+app.post('/play', assignLibsMiddleware, (req, res) => {res.send({err:
+  res.locals.s3Error, data: res.locals.s3Data})});
 app.get('/play', assignLibsMiddleware, (req, res) => {res.send()});
 
 
