@@ -148,7 +148,7 @@ app.post('/db', db);
 app.get('/db', db);
 
 app.post('/play', assignLibsMiddleware, (req, res) => {res.send({err:
-  res.locals.s3Error, data: res.locals.s3Data, libs: res.locals.libs})});
+  res.locals.dbError, data: res.locals.participants})});
 app.get('/play', assignLibsMiddleware, (req, res) => {res.send()});
 
 
