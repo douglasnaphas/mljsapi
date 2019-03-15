@@ -30,7 +30,9 @@ const schema = {
   CLOSED: 'closed',
   // participants
   SESSION_KEY: 'session_key',
-  GAME_NAME: 'game_name'
+  GAME_NAME: 'game_name',
+  ASSIGNMENTS: 'assignments',
+  ANSWERS: 'answers'
 }
 
 module.exports = schema;
