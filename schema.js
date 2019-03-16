@@ -19,6 +19,7 @@ const schema = {
   SCRIPTS_INDEX: 'scripts',
   SCRIPTS_PART_KEY: 'is_script',
   // attribute names
+  SCRIPT_VERSION: 'script_version',
   // scripts
   HAGGADAH_DESCRIPTION: 'haggadah_description',
   HAGGADAH_NAME: 'haggadah_name',
