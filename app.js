@@ -149,7 +149,7 @@ app.post('/db', db);
 app.get('/db', db);
 
 app.post('/play', assignLibsMiddleware, (req, res) => {res.send({err:
-  res.locals.dbError, data: res.locals.participants})});
+  res.locals.dbError, data: res.locals.dbData})});
 app.get('/play', assignLibsMiddleware, (req, res) => {res.send()});
 
 
