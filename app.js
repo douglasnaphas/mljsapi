@@ -138,7 +138,7 @@ app.get('/roster', gameNameCookieCheckMidWare, rosterMiddleware);
 const closeSederMiddleware =
   require('./lib/closeSederMiddleware/closeSederMiddleware.js');
 app.post('/close-seder', gameNameCookieCheckMidWare, closeSederMiddleware,
-  (req, res) => {res.send(responses.success())});
+  assignLibsMiddleware, (req, res) => {res.send(responses.success())});
 
 // const db = require('./lib/db');
 // const db = require('./lib/dbPlayGetParticipants');
