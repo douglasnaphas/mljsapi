@@ -18,6 +18,8 @@ const gameNameCookieCheckMidWare =
 const responses = require('./responses');
 const assignLibsMiddleware =
   require('./lib/assignLibsMiddleware/assignLibsMiddleware.js');
+const assignmentsMiddleware =
+  require('./lib/assignmentsMiddleware/assignmentsMiddleware.js');
 
 app.use(function(req, res, next) {
   res.set({
@@ -150,7 +152,8 @@ app.get('/db', db);
 
 app.post('/play', assignLibsMiddleware, (req, res) => {res.send({err:
   res.locals.dbError, data: res.locals.dbData})});
-app.get('/play', assignLibsMiddleware, (req, res) => {res.send()});
+app.get('/play', assignmentsMiddleware, (req, res) => {
+  res.send({result: 'ok'})});
 
 
 // Export your Express configuration so that it can be consumed by the Lambda handler
