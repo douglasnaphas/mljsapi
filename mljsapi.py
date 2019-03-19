@@ -393,6 +393,36 @@ t.add_resource(
   )
 )
 
+# assignments
+t.add_resource(
+  Function(
+    "Assignments",
+    Handler="index.handler",
+    Runtime="nodejs8.10",
+    CodeUri="this is not really required, as it is specified in buildspec.yml",
+    Environment=Environment(
+      Variables={
+        "NODE_ENV": "production"
+      }
+    ),
+    Role=ImportValue(
+      Join("-", [Ref(projectid), Ref("AWS::Region"), "LambdaTrustRole"])
+    ),
+    Events={
+      "GetEvent": ApiEvent(
+        "GetEvent",
+        Path="/assignments",
+        Method="get"
+      ),
+      "OptionsEvent": ApiEvent(
+        "OptionsEvent",
+        Path="/assignments",
+        Method="options"
+      )
+    }
+  )
+)
+
 for line in t.to_yaml().splitlines():
   if not re.search(r'^\s*CodeUri:', line):
     print(line)

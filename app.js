@@ -142,6 +142,8 @@ const closeSederMiddleware =
 app.post('/close-seder', gameNameCookieCheckMidWare, closeSederMiddleware,
   assignLibsMiddleware, (req, res) => {res.send(responses.success())});
 
+app.get('/assignments', gameNameCookieCheckMidWare, assignmentsMiddleware);
+
 // const db = require('./lib/db');
 // const db = require('./lib/dbPlayGetParticipants');
 // const db = require('./lib/dbPlayGetScripts');
