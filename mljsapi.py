@@ -441,12 +441,12 @@ t.add_resource(
     Events={
       "PostEvent": ApiEvent(
         "PostEvent",
-        Path="/assignments",
+        Path="/submit-libs",
         Method="post"
       ),
       "OptionsEvent": ApiEvent(
         "OptionsEvent",
-        Path="/assignments",
+        Path="/submit-libs",
         Method="options"
       )
     }

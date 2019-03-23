@@ -359,12 +359,12 @@ Resources:
         OptionsEvent:
           Properties:
             Method: options
-            Path: /assignments
+            Path: /submit-libs
           Type: Api
         PostEvent:
           Properties:
             Method: post
-            Path: /assignments
+            Path: /submit-libs
           Type: Api
       Handler: index.handler
       Role: !ImportValue
