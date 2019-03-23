@@ -350,6 +350,31 @@ Resources:
             - LambdaTrustRole
       Runtime: nodejs8.10
     Type: AWS::Serverless::Function
+  SubmitLibs:
+    Properties:
+      Environment:
+        Variables:
+          NODE_ENV: production
+      Events:
+        OptionsEvent:
+          Properties:
+            Method: options
+            Path: /assignments
+          Type: Api
+        PostEvent:
+          Properties:
+            Method: post
+            Path: /assignments
+          Type: Api
+      Handler: index.handler
+      Role: !ImportValue
+        Fn::Join:
+          - '-'
+          - - !Ref 'ProjectId'
+            - !Ref 'AWS::Region'
+            - LambdaTrustRole
+      Runtime: nodejs8.10
+    Type: AWS::Serverless::Function
 Transform:
   - AWS::Serverless-2016-10-31
   - AWS::CodeStar
