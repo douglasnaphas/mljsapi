@@ -453,6 +453,35 @@ t.add_resource(
   )
 )
 
+# read-roster
+t.add_resource(
+  Function(
+    "ReadRoster",
+    Handler="index.handler",
+    Runtime="nodejs8.10",
+    CodeUri="this is not really required, as it is specified in buildspec.yml",
+    Environment=Environment(
+      Variables={
+        "NODE_ENV": "production"
+      }
+    ),
+    Role=ImportValue(
+      Join("-", [Ref(projectid), Ref("AWS::Region"), "LambdaTrustRole"])
+    ),
+    Events={
+      "GetEvent": ApiEvent(
+        "GetEvent",
+        Path="/read-roster",
+        Method="get"
+      ),
+      "OptionsEvent": ApiEvent(
+        "OptionsEvent",
+        Path="/read-roster",
+        Method="options"
+      )
+    }
+  )
+)
 
 
 for line in t.to_yaml().splitlines():

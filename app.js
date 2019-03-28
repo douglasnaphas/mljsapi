@@ -150,6 +150,9 @@ app.get('/assignments', gameNameCookieCheckMidWare, assignmentsMiddleware);
 
 app.post('/submit-libs', submitLibsMiddleware, (req, res, next) => {
   return res.send({result: 'ok'})});
+  
+app.get('/read-roster', readRosterMiddleware, (req, res) => {res.send({done:
+  res.locals.done, notDone: res.locals.notDone})});
 
 // const db = require('./lib/db');
 // const db = require('./lib/dbPlayGetParticipants');

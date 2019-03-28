@@ -275,6 +275,31 @@ Resources:
             - LambdaTrustRole
       Runtime: nodejs8.10
     Type: AWS::Serverless::Function
+  ReadRoster:
+    Properties:
+      Environment:
+        Variables:
+          NODE_ENV: production
+      Events:
+        GetEvent:
+          Properties:
+            Method: get
+            Path: /read-roster
+          Type: Api
+        OptionsEvent:
+          Properties:
+            Method: options
+            Path: /read-roster
+          Type: Api
+      Handler: index.handler
+      Role: !ImportValue
+        Fn::Join:
+          - '-'
+          - - !Ref 'ProjectId'
+            - !Ref 'AWS::Region'
+            - LambdaTrustRole
+      Runtime: nodejs8.10
+    Type: AWS::Serverless::Function
   RoomCode:
     Properties:
       Environment:
