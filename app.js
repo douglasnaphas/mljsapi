@@ -157,10 +157,6 @@ app.get('/read-roster', gameNameCookieCheckMidWare, readRosterMiddleware,
   (req, res) => {res.send({done: res.locals.done,
   notDone: res.locals.notDone})});
 
-// const db = require('./lib/db');
-// const db = require('./lib/dbPlayGetParticipants');
-// const db = require('./lib/dbPlayGetScripts');
-// const db = require('./lib/dbPlayCloseSeder');
 const db = require('./lib/dbPlayAssignLibs');
 app.post('/db', db);
 app.get('/db', db);
