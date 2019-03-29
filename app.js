@@ -24,6 +24,8 @@ const submitLibsMiddleware =
   require('./lib/submitLibsMiddleware/submitLibsMiddleware.js');
 const readRosterMiddleware =
   require('./lib/readRosterMiddleware/readRosterMiddleware.js');
+const scriptMiddleware =
+  require('./lib/scriptMiddleware/scriptMiddleware');
 
 app.use(function(req, res, next) {
   res.set({
@@ -164,8 +166,8 @@ app.get('/db', db);
 
 app.post('/play', readRosterMiddleware, (req, res) => {res.send({err:
   res.locals.dbError, data: res.locals.dbData})});
-app.get('/play', readRosterMiddleware, (req, res) => {
-  res.send({done: res.locals.done, notDone: res.locals.notDone})});
+app.get('/play', scriptMiddleware, (req, res) => {
+  res.send({err: res.locals.dbError, data: res.locals.dbData})});
 
 
 // Export your Express configuration so that it can be consumed by the Lambda handler
