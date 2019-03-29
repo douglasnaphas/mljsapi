@@ -153,8 +153,9 @@ app.get('/assignments', gameNameCookieCheckMidWare, assignmentsMiddleware);
 app.post('/submit-libs', gameNameCookieCheckMidWare, submitLibsMiddleware,
   (req, res, next) => {return res.send({result: 'ok'})});
   
-app.get('/read-roster', readRosterMiddleware, (req, res) => {res.send({done:
-  res.locals.done, notDone: res.locals.notDone})});
+app.get('/read-roster', gameNameCookieCheckMidWare, readRosterMiddleware,
+  (req, res) => {res.send({done: res.locals.done,
+  notDone: res.locals.notDone})});
 
 // const db = require('./lib/db');
 // const db = require('./lib/dbPlayGetParticipants');
