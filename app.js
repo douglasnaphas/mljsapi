@@ -152,10 +152,13 @@ app.get('/assignments', gameNameCookieCheckMidWare, assignmentsMiddleware);
 
 app.post('/submit-libs', gameNameCookieCheckMidWare, submitLibsMiddleware,
   (req, res, next) => {return res.send({result: 'ok'})});
-  
+
 app.get('/read-roster', gameNameCookieCheckMidWare, readRosterMiddleware,
   (req, res) => {res.send({done: res.locals.done,
   notDone: res.locals.notDone})});
+
+app.get('/script', gameNameCookieCheckMidWare, scriptMiddleware, (req, res) =>
+  {res.send(res.locals.script)});
 
 const db = require('./lib/dbPlayAssignLibs');
 app.post('/db', db);
