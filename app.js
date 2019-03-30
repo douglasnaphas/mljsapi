@@ -164,9 +164,7 @@ app.get('/db', db);
 app.post('/play', readRosterMiddleware, (req, res) => {res.send({err:
   res.locals.dbError, data: res.locals.dbData})});
 app.get('/play', scriptMiddleware, (req, res) => {
-  res.send({path: res.locals.path, version: res.locals.version, answers: 
-    res.locals.answers, s3Data: res.locals.s3Data, s3Error: res.locals.s3Error
-    })});
+  res.send(res.locals.script)});
 
 
 // Export your Express configuration so that it can be consumed by the Lambda handler
