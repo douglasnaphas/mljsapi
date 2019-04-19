@@ -121,6 +121,7 @@ t.add_resource(
     Handler="index.handler",
     Runtime="nodejs8.10",
     Timeout=30,
+    MemorySize=1792,
     CodeUri="this is not really required, as it is specified in buildspec.yml",
     Environment=Environment(
       Variables={
@@ -183,6 +184,7 @@ t.add_resource(
     Handler="index.handler",
     Runtime="nodejs8.10",
     Timeout=30,
+    MemorySize=1792,
     CodeUri="this is not really required, as it is specified in buildspec.yml",
     Environment=Environment(
       Variables={
@@ -213,7 +215,8 @@ t.add_resource(
     "RoomCode",
     Handler="index.handler",
     Runtime="nodejs8.10",
-    Timeout=30,
+    Timeout=40,
+    MemorySize=3008,
     CodeUri="this is not really required, as it is specified in buildspec.yml",
     Environment=Environment(
       Variables={
@@ -245,6 +248,7 @@ t.add_resource(
     Handler="index.handler",
     Runtime="nodejs8.10",
     Timeout=30,
+    MemorySize=1792,
     CodeUri="this is not really required, as it is specified in buildspec.yml",
     Environment=Environment(
       Variables={
@@ -311,7 +315,8 @@ t.add_resource(
     "Roster",
     Handler="index.handler",
     Runtime="nodejs8.10",
-    Timeout=30,
+    Timeout=40,
+    MemorySize=3008,
     CodeUri="this is not really required, as it is specified in buildspec.yml",
     Environment=Environment(
       Variables={
@@ -343,6 +348,7 @@ t.add_resource(
     Handler="index.handler",
     Runtime="nodejs8.10",
     Timeout=40,
+    MemorySize=3008,
     CodeUri="this is not really required, as it is specified in buildspec.yml",
     Environment=Environment(
       Variables={
@@ -409,7 +415,8 @@ t.add_resource(
     "Assignments",
     Handler="index.handler",
     Runtime="nodejs8.10",
-    Timeout=30,
+    Timeout=60,
+    MemorySize=3008,
     CodeUri="this is not really required, as it is specified in buildspec.yml",
     Environment=Environment(
       Variables={
@@ -440,7 +447,8 @@ t.add_resource(
     "SubmitLibs",
     Handler="index.handler",
     Runtime="nodejs8.10",
-    Timeout=30,
+    Timeout=40,
+    MemorySize=3008,
     CodeUri="this is not really required, as it is specified in buildspec.yml",
     Environment=Environment(
       Variables={
@@ -471,7 +479,8 @@ t.add_resource(
     "ReadRoster",
     Handler="index.handler",
     Runtime="nodejs8.10",
-    Timeout=30,
+    Timeout=60,
+    MemorySize=3008,
     CodeUri="this is not really required, as it is specified in buildspec.yml",
     Environment=Environment(
       Variables={
@@ -502,7 +511,8 @@ t.add_resource(
     "Script",
     Handler="index.handler",
     Runtime="nodejs8.10",
-    Timeout=30,
+    Timeout=80,
+    MemorySize=1792,
     CodeUri="this is not really required, as it is specified in buildspec.yml",
     Environment=Environment(
       Variables={

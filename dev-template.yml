@@ -21,6 +21,7 @@ Resources:
             Path: /assignments
           Type: Api
       Handler: index.handler
+      MemorySize: 3008
       Role: !ImportValue
         Fn::Join:
           - '-'
@@ -28,7 +29,7 @@ Resources:
             - !Ref 'AWS::Region'
             - LambdaTrustRole
       Runtime: nodejs8.10
-      Timeout: 30
+      Timeout: 60
     Type: AWS::Serverless::Function
   CloseSeder:
     Properties:
@@ -47,6 +48,7 @@ Resources:
             Path: /close-seder
           Type: Api
       Handler: index.handler
+      MemorySize: 3008
       Role: !ImportValue
         Fn::Join:
           - '-'
@@ -104,6 +106,7 @@ Resources:
             Path: /get-cookies
           Type: Api
       Handler: index.handler
+      MemorySize: 1792
       Role: !ImportValue
         Fn::Join:
           - '-'
@@ -161,6 +164,7 @@ Resources:
             Path: /join-seder
           Type: Api
       Handler: index.handler
+      MemorySize: 1792
       Role: !ImportValue
         Fn::Join:
           - '-'
@@ -300,6 +304,7 @@ Resources:
             Path: /read-roster
           Type: Api
       Handler: index.handler
+      MemorySize: 3008
       Role: !ImportValue
         Fn::Join:
           - '-'
@@ -307,7 +312,7 @@ Resources:
             - !Ref 'AWS::Region'
             - LambdaTrustRole
       Runtime: nodejs8.10
-      Timeout: 30
+      Timeout: 60
     Type: AWS::Serverless::Function
   RoomCode:
     Properties:
@@ -326,6 +331,7 @@ Resources:
             Path: /room-code
           Type: Api
       Handler: index.handler
+      MemorySize: 3008
       Role: !ImportValue
         Fn::Join:
           - '-'
@@ -333,7 +339,7 @@ Resources:
             - !Ref 'AWS::Region'
             - LambdaTrustRole
       Runtime: nodejs8.10
-      Timeout: 30
+      Timeout: 40
     Type: AWS::Serverless::Function
   Roster:
     Properties:
@@ -352,6 +358,7 @@ Resources:
             Path: /roster
           Type: Api
       Handler: index.handler
+      MemorySize: 3008
       Role: !ImportValue
         Fn::Join:
           - '-'
@@ -359,7 +366,7 @@ Resources:
             - !Ref 'AWS::Region'
             - LambdaTrustRole
       Runtime: nodejs8.10
-      Timeout: 30
+      Timeout: 40
     Type: AWS::Serverless::Function
   Script:
     Properties:
@@ -378,6 +385,7 @@ Resources:
             Path: /script
           Type: Api
       Handler: index.handler
+      MemorySize: 1792
       Role: !ImportValue
         Fn::Join:
           - '-'
@@ -385,7 +393,7 @@ Resources:
             - !Ref 'AWS::Region'
             - LambdaTrustRole
       Runtime: nodejs8.10
-      Timeout: 30
+      Timeout: 80
     Type: AWS::Serverless::Function
   Scripts:
     Properties:
@@ -404,6 +412,7 @@ Resources:
             Path: /scripts
           Type: Api
       Handler: index.handler
+      MemorySize: 1792
       Role: !ImportValue
         Fn::Join:
           - '-'
@@ -430,6 +439,7 @@ Resources:
             Path: /submit-libs
           Type: Api
       Handler: index.handler
+      MemorySize: 3008
       Role: !ImportValue
         Fn::Join:
           - '-'
@@ -437,7 +447,7 @@ Resources:
             - !Ref 'AWS::Region'
             - LambdaTrustRole
       Runtime: nodejs8.10
-      Timeout: 30
+      Timeout: 40
     Type: AWS::Serverless::Function
 Transform:
   - AWS::Serverless-2016-10-31
