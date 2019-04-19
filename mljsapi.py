@@ -89,6 +89,7 @@ t.add_resource(
     "PublicEndpoint",
     Handler="index.handler",
     Runtime="nodejs8.10",
+    Timeout=5,
     CodeUri="this is not really required, as it is specified in buildspec.yml",
     Environment=Environment(
       Variables={
@@ -119,6 +120,7 @@ t.add_resource(
     "GetCookies",
     Handler="index.handler",
     Runtime="nodejs8.10",
+    Timeout=30,
     CodeUri="this is not really required, as it is specified in buildspec.yml",
     Environment=Environment(
       Variables={
@@ -149,6 +151,7 @@ t.add_resource(
     "Playground",
     Handler="index.handler",
     Runtime="nodejs8.10",
+    Timeout=30,
     CodeUri="this is not really required, as it is specified in buildspec.yml",
     Environment=Environment(
       Variables={
@@ -179,6 +182,7 @@ t.add_resource(
     "Scripts",
     Handler="index.handler",
     Runtime="nodejs8.10",
+    Timeout=30,
     CodeUri="this is not really required, as it is specified in buildspec.yml",
     Environment=Environment(
       Variables={
@@ -209,6 +213,7 @@ t.add_resource(
     "RoomCode",
     Handler="index.handler",
     Runtime="nodejs8.10",
+    Timeout=30,
     CodeUri="this is not really required, as it is specified in buildspec.yml",
     Environment=Environment(
       Variables={
@@ -239,6 +244,7 @@ t.add_resource(
     "JoinSeder",
     Handler="index.handler",
     Runtime="nodejs8.10",
+    Timeout=30,
     CodeUri="this is not really required, as it is specified in buildspec.yml",
     Environment=Environment(
       Variables={
@@ -269,6 +275,7 @@ t.add_resource(
     "DB",
     Handler="index.handler",
     Runtime="nodejs8.10",
+    Timeout=10,
     CodeUri="this is not really required, as it is specified in buildspec.yml",
     Environment=Environment(
       Variables={
@@ -304,6 +311,7 @@ t.add_resource(
     "Roster",
     Handler="index.handler",
     Runtime="nodejs8.10",
+    Timeout=30,
     CodeUri="this is not really required, as it is specified in buildspec.yml",
     Environment=Environment(
       Variables={
@@ -334,6 +342,7 @@ t.add_resource(
     "CloseSeder",
     Handler="index.handler",
     Runtime="nodejs8.10",
+    Timeout=40,
     CodeUri="this is not really required, as it is specified in buildspec.yml",
     Environment=Environment(
       Variables={
@@ -364,6 +373,7 @@ t.add_resource(
     "Play",
     Handler="index.handler",
     Runtime="nodejs8.10",
+    Timeout=5,
     CodeUri="this is not really required, as it is specified in buildspec.yml",
     Environment=Environment(
       Variables={
@@ -399,6 +409,7 @@ t.add_resource(
     "Assignments",
     Handler="index.handler",
     Runtime="nodejs8.10",
+    Timeout=30,
     CodeUri="this is not really required, as it is specified in buildspec.yml",
     Environment=Environment(
       Variables={
@@ -429,6 +440,7 @@ t.add_resource(
     "SubmitLibs",
     Handler="index.handler",
     Runtime="nodejs8.10",
+    Timeout=30,
     CodeUri="this is not really required, as it is specified in buildspec.yml",
     Environment=Environment(
       Variables={
@@ -459,6 +471,7 @@ t.add_resource(
     "ReadRoster",
     Handler="index.handler",
     Runtime="nodejs8.10",
+    Timeout=30,
     CodeUri="this is not really required, as it is specified in buildspec.yml",
     Environment=Environment(
       Variables={
@@ -489,6 +502,7 @@ t.add_resource(
     "Script",
     Handler="index.handler",
     Runtime="nodejs8.10",
+    Timeout=30,
     CodeUri="this is not really required, as it is specified in buildspec.yml",
     Environment=Environment(
       Variables={
