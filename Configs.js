@@ -21,7 +21,7 @@ class Configs {
    * seder cannot be joined.
    */
   static msToJoinSeder() {
-    return 1000 /* ms/s */ * 60 /* s/minute */ * 30 /* minutes */;
+    return 1000 /* ms/s */ * 60 /* s/minute */ * 480 /* minutes */;
   }
   
   /**
