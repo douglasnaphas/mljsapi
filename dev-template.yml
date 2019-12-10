@@ -28,7 +28,7 @@ Resources:
           - - !Ref 'ProjectId'
             - !Ref 'AWS::Region'
             - LambdaTrustRole
-      Runtime: nodejs8.10
+      Runtime: nodejs12.x
       Timeout: 60
     Type: AWS::Serverless::Function
   CloseSeder:
@@ -55,7 +55,7 @@ Resources:
           - - !Ref 'ProjectId'
             - !Ref 'AWS::Region'
             - LambdaTrustRole
-      Runtime: nodejs8.10
+      Runtime: nodejs12.x
       Timeout: 40
     Type: AWS::Serverless::Function
   DB:
@@ -86,7 +86,7 @@ Resources:
           - - !Ref 'ProjectId'
             - !Ref 'AWS::Region'
             - LambdaTrustRole
-      Runtime: nodejs8.10
+      Runtime: nodejs12.x
       Timeout: 10
     Type: AWS::Serverless::Function
   GetCookies:
@@ -113,7 +113,7 @@ Resources:
           - - !Ref 'ProjectId'
             - !Ref 'AWS::Region'
             - LambdaTrustRole
-      Runtime: nodejs8.10
+      Runtime: nodejs12.x
       Timeout: 30
     Type: AWS::Serverless::Function
   HelloWorld:
@@ -145,7 +145,7 @@ Resources:
           - - !Ref 'ProjectId'
             - !Ref 'AWS::Region'
             - LambdaTrustRole
-      Runtime: nodejs8.10
+      Runtime: nodejs12.x
     Type: AWS::Serverless::Function
   JoinSeder:
     Properties:
@@ -171,7 +171,7 @@ Resources:
           - - !Ref 'ProjectId'
             - !Ref 'AWS::Region'
             - LambdaTrustRole
-      Runtime: nodejs8.10
+      Runtime: nodejs12.x
       Timeout: 30
     Type: AWS::Serverless::Function
   Play:
@@ -202,7 +202,7 @@ Resources:
           - - !Ref 'ProjectId'
             - !Ref 'AWS::Region'
             - LambdaTrustRole
-      Runtime: nodejs8.10
+      Runtime: nodejs12.x
       Timeout: 5
     Type: AWS::Serverless::Function
   Playground:
@@ -228,7 +228,7 @@ Resources:
           - - !Ref 'ProjectId'
             - !Ref 'AWS::Region'
             - LambdaTrustRole
-      Runtime: nodejs8.10
+      Runtime: nodejs12.x
       Timeout: 30
     Type: AWS::Serverless::Function
   ProtectedEndpoint:
@@ -259,7 +259,7 @@ Resources:
           - - !Ref 'ProjectId'
             - !Ref 'AWS::Region'
             - LambdaTrustRole
-      Runtime: nodejs8.10
+      Runtime: nodejs12.x
     Type: AWS::Serverless::Function
   PublicEndpoint:
     Properties:
@@ -284,7 +284,7 @@ Resources:
           - - !Ref 'ProjectId'
             - !Ref 'AWS::Region'
             - LambdaTrustRole
-      Runtime: nodejs8.10
+      Runtime: nodejs12.x
       Timeout: 5
     Type: AWS::Serverless::Function
   ReadRoster:
@@ -311,7 +311,7 @@ Resources:
           - - !Ref 'ProjectId'
             - !Ref 'AWS::Region'
             - LambdaTrustRole
-      Runtime: nodejs8.10
+      Runtime: nodejs12.x
       Timeout: 60
     Type: AWS::Serverless::Function
   RoomCode:
@@ -338,7 +338,7 @@ Resources:
           - - !Ref 'ProjectId'
             - !Ref 'AWS::Region'
             - LambdaTrustRole
-      Runtime: nodejs8.10
+      Runtime: nodejs12.x
       Timeout: 40
     Type: AWS::Serverless::Function
   Roster:
@@ -365,7 +365,7 @@ Resources:
           - - !Ref 'ProjectId'
             - !Ref 'AWS::Region'
             - LambdaTrustRole
-      Runtime: nodejs8.10
+      Runtime: nodejs12.x
       Timeout: 40
     Type: AWS::Serverless::Function
   Script:
@@ -392,7 +392,7 @@ Resources:
           - - !Ref 'ProjectId'
             - !Ref 'AWS::Region'
             - LambdaTrustRole
-      Runtime: nodejs8.10
+      Runtime: nodejs12.x
       Timeout: 80
     Type: AWS::Serverless::Function
   Scripts:
@@ -419,7 +419,7 @@ Resources:
           - - !Ref 'ProjectId'
             - !Ref 'AWS::Region'
             - LambdaTrustRole
-      Runtime: nodejs8.10
+      Runtime: nodejs12.x
       Timeout: 30
     Type: AWS::Serverless::Function
   SubmitLibs:
@@ -446,7 +446,7 @@ Resources:
           - - !Ref 'ProjectId'
             - !Ref 'AWS::Region'
             - LambdaTrustRole
-      Runtime: nodejs8.10
+      Runtime: nodejs12.x
       Timeout: 40
     Type: AWS::Serverless::Function
 Transform:
