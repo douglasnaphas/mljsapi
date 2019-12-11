@@ -60,7 +60,7 @@ app.get('/', function(req, res) {
       console.log('***** error occurred describing table');
       console.log(err, err.stack);
       res.send({ err: err, stack: err.stack });
-    } // an error occurred
+    }
     else {
       console.log('###### successfully described table');
       console.log(data);
