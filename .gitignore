@@ -3,3 +3,4 @@ exclude
 build
 template-export.yml
 .vscode/
+.nvmrc
