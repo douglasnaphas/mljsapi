@@ -13,8 +13,20 @@ projectid = t.add_parameter(Parameter(
   Type="String"
 ))
 
-common_function_args = {
-  "Handler": "index.handler",
+def events(path, get, post, options):
+  ev = {"Events": {}}
+  if get:
+    ev["Events"]["GetEvent"] = ApiEvent("GetEvent", Path=path, Method="get")
+  if post:
+    ev["Events"]["PostEvent"] = ApiEvent("PostEvent", Path=path, Method="post")
+  if options:
+    ev["Events"]["OptionsEvent"] = \
+      ApiEvent("OptionsEvent", Path=path, Method="options")
+  return ev
+def add_function(template, name, path, db_access=False, get=False, post=False,
+  options=False, timeout=None, memory_size=None):
+  common_function_args = {
+    "Handler": "index.handler",
     "Runtime": "nodejs12.x",
     "CodeUri": "this is not really required, as it is specified in buildspec.yml",
     "Environment": Environment(
@@ -24,199 +36,41 @@ common_function_args = {
     ),
     "Role": ImportValue(
       Join("-", [Ref(projectid), Ref("AWS::Region"), "LambdaTrustRole"])
-    )}
-common_args_db_access = {
-  **common_function_args,
-  "Policies": "AmazonDynamoDBFullAccess",
-}
-def events(path, get, post, options):
-  pass
-
-# HelloWorld
-t.add_resource(
-  Function(
-    "HelloWorld",
-    **common_args_db_access,
-    Events={
-      "GetEvent": ApiEvent(
-        "GetEvent",
-        Path="/",
-        Method="get"
-      ),
-      "PostEvent": ApiEvent(
-        "PostEvent",
-        Path="/",
-        Method="post"
-      ),
-      "OptionsEvent": ApiEvent(
-        "OptionsEvent",
-        Path="/",
-        Method="options"
-      )
-    }
+  )}
+  common_args_db_access = {
+    **common_function_args,
+    "Policies": "AmazonDynamoDBFullAccess",
+  }
+  common_args = {}
+  if db_access:
+    common_args = common_args_db_access
+  else:
+    common_args = common_function_args
+  if timeout:
+    common_args["Timeout"] = timeout
+  if memory_size:
+    common_args["MemorySize"] = memory_size
+  template.add_resource(
+    Function(
+      name,
+      **common_args,
+      **events(path, get=get, post=post, options=options)
+    )
   )
-)
 
-# Protected Endpoint
-t.add_resource(
-  Function(
-    "ProtectedEndpoint",
-    Handler="index.handler",
-    Runtime="nodejs8.10",
-    CodeUri="this is not really required, as it is specified in buildspec.yml",
-    Environment=Environment(
-      Variables={
-        "NODE_ENV": "production"
-      }
-    ),
-    Role=ImportValue(
-      Join("-", [Ref(projectid), Ref("AWS::Region"), "LambdaTrustRole"])
-    ),
-    Events={
-      "GetEvent": ApiEvent(
-        "GetEvent",
-        Path="/protected-endpoint",
-        Method="get"
-      ),
-      "PostEvent": ApiEvent(
-        "PostEvent",
-        Path="/protected-endpoint",
-        Method="post"
-      ),
-      "OptionsEvent": ApiEvent(
-        "OptionsEvent",
-        Path="/protected-endpoint",
-        Method="options"
-      )
-    }
-  )
-)
+add_function(t, "HelloWorld", path="/", db_access=True, get=True, post=True,
+  options=True)
+add_function(t, "ProtectedEndpoint", path="/protected-endpoint", get=True,
+  post=True, options=True)
+add_function(t, "PublicEndpoint", path="/public-endpoint", get=True,
+  options=True, timeout=5)
+add_function(t, "GetCookies", path="/get-cookies", timeout=30, memory_size=1792,
+  get=True, options=True)
+add_function(t, "Playground", path="/playground", timeout=30, get=True,
+  options=True)
+add_function(t, "Scripts", path="/scripts", timeout=30, memory_size=1792,
+  get=True, options=True)
 
-# Public Endpoint
-t.add_resource(
-  Function(
-    "PublicEndpoint",
-    Handler="index.handler",
-    Runtime="nodejs8.10",
-    Timeout=5,
-    CodeUri="this is not really required, as it is specified in buildspec.yml",
-    Environment=Environment(
-      Variables={
-        "NODE_ENV": "production"
-      }
-    ),
-    Role=ImportValue(
-      Join("-", [Ref(projectid), Ref("AWS::Region"), "LambdaTrustRole"])
-    ),
-    Events={
-      "GetEvent": ApiEvent(
-        "GetEvent",
-        Path="/public-endpoint",
-        Method="get"
-      ),
-      "OptionsEvent": ApiEvent(
-        "OptionsEvent",
-        Path="/public-endpoint",
-        Method="options"
-      )
-    }
-  )
-)
-
-# Get Cookies
-t.add_resource(
-  Function(
-    "GetCookies",
-    Handler="index.handler",
-    Runtime="nodejs8.10",
-    Timeout=30,
-    MemorySize=1792,
-    CodeUri="this is not really required, as it is specified in buildspec.yml",
-    Environment=Environment(
-      Variables={
-        "NODE_ENV": "production"
-      }
-    ),
-    Role=ImportValue(
-      Join("-", [Ref(projectid), Ref("AWS::Region"), "LambdaTrustRole"])
-    ),
-    Events={
-      "GetEvent": ApiEvent(
-        "GetEvent",
-        Path="/get-cookies",
-        Method="get"
-      ),
-      "OptionsEvent": ApiEvent(
-        "OptionsEvent",
-        Path="/get-cookies",
-        Method="options"
-      )
-    }
-  )
-)
-
-# Playground
-t.add_resource(
-  Function(
-    "Playground",
-    Handler="index.handler",
-    Runtime="nodejs8.10",
-    Timeout=30,
-    CodeUri="this is not really required, as it is specified in buildspec.yml",
-    Environment=Environment(
-      Variables={
-        "NODE_ENV": "production"
-      }
-    ),
-    Role=ImportValue(
-      Join("-", [Ref(projectid), Ref("AWS::Region"), "LambdaTrustRole"])
-    ),
-    Events={
-      "GetEvent": ApiEvent(
-        "GetEvent",
-        Path="/playground",
-        Method="get"
-      ),
-      "OptionsEvent": ApiEvent(
-        "OptionsEvent",
-        Path="/playground",
-        Method="options"
-      )
-    }
-  )
-)
-
-# scripts
-t.add_resource(
-  Function(
-    "Scripts",
-    Handler="index.handler",
-    Runtime="nodejs8.10",
-    Timeout=30,
-    MemorySize=1792,
-    CodeUri="this is not really required, as it is specified in buildspec.yml",
-    Environment=Environment(
-      Variables={
-        "NODE_ENV": "production"
-      }
-    ),
-    Role=ImportValue(
-      Join("-", [Ref(projectid), Ref("AWS::Region"), "LambdaTrustRole"])
-    ),
-    Events={
-      "GetEvent": ApiEvent(
-        "GetEvent",
-        Path="/scripts",
-        Method="get"
-      ),
-      "OptionsEvent": ApiEvent(
-        "OptionsEvent",
-        Path="/scripts",
-        Method="options"
-      )
-    }
-  )
-)
 
 # room-code
 t.add_resource(
