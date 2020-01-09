@@ -25,3 +25,7 @@ For example:
 
     sed 's/NODE_ENV: production/NODE_ENV: development/' ./template.yml > ./dev-template.yml
     sam local start-api --template ./dev-template.yml --port 3002 --host 172.31.41.172
+
+## CloudFormation
+
+`mljsapi.py`, which uses [troposphere](https://github.com/cloudtools/troposphere), should generate `template.yml`. `diff <(python mljsapi.py) template.yml` should exit 0. Eventually `template.yml` can be generated during the build process.
