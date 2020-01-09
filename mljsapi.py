@@ -4,30 +4,39 @@ from troposphere.awslambda import Environment
 from troposphere.serverless import Function, ApiEvent
 
 t = Template()
-t.add_version('2010-09-09')
-t.add_transform(['AWS::Serverless-2016-10-31', 'AWS::CodeStar'])
+
+t.set_version('2010-09-09')
+t.set_transform(['AWS::Serverless-2016-10-31', 'AWS::CodeStar'])
 projectid = t.add_parameter(Parameter(
   "ProjectId",
   Description="AWS CodeStar projectID used to associate new resources to team members",
   Type="String"
 ))
 
-# HelloWorld
-t.add_resource(
-  Function(
-    "HelloWorld",
-    Handler="index.handler",
-    Runtime="nodejs8.10",
-    CodeUri="this is not really required, as it is specified in buildspec.yml",
-    Policies="AmazonDynamoDBFullAccess",
-    Environment=Environment(
+common_function_args = {
+  "Handler": "index.handler",
+    "Runtime": "nodejs12.x",
+    "CodeUri": "this is not really required, as it is specified in buildspec.yml",
+    "Environment": Environment(
       Variables={
         "NODE_ENV": "production"
       }
     ),
-    Role=ImportValue(
+    "Role": ImportValue(
       Join("-", [Ref(projectid), Ref("AWS::Region"), "LambdaTrustRole"])
-    ),
+    )}
+common_args_db_access = {
+  **common_function_args,
+  "Policies": "AmazonDynamoDBFullAccess",
+}
+def events(path, get, post, options):
+  pass
+
+# HelloWorld
+t.add_resource(
+  Function(
+    "HelloWorld",
+    **common_args_db_access,
     Events={
       "GetEvent": ApiEvent(
         "GetEvent",

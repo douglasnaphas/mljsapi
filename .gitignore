@@ -4,3 +4,4 @@ build
 template-export.yml
 .vscode/
 .nvmrc
+venv374/
