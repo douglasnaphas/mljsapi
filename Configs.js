@@ -24,6 +24,17 @@ class Configs {
     return "us-east-1_Yn89yKizn";
   }
 
+  static CognitoTokenEndpointURL() {
+    return (
+      "https://madliberationfederated.auth.us-east-1.amazoncognito.com/" +
+      "oauth2/token"
+    );
+  }
+
+  static CognitoRedirectURI() {
+    return "http://localhost:3000/index.html";
+  }
+
   /**
    * @return {Number} The number of milliseconds allowed to elapse before a new
    * seder cannot be joined.
