@@ -32,7 +32,7 @@ class Configs {
   }
 
   static CognitoRedirectURI() {
-    return "http://localhost:3000/index.html";
+    return "http://localhost:4001/get-cookies";
   }
 
   /**
