@@ -66,6 +66,8 @@ add_function(t, "PublicEndpoint", path="/public-endpoint", get=True,
   options=True, timeout=5)
 add_function(t, "GetCookies", path="/get-cookies", timeout=30, memory_size=1792,
   get=True, options=True)
+add_function(t, "Id", path="/id", timeout=30, memory_size=3008,
+  get=True, options=True)
 add_function(t, "Playground", path="/playground", timeout=30, get=True,
   options=True)
 add_function(t, "Scripts", path="/scripts", timeout=30, memory_size=1792,
