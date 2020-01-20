@@ -21,6 +21,7 @@ const submitLibsMiddleware = require("./lib/submitLibsMiddleware/submitLibsMiddl
 const readRosterMiddleware = require("./lib/readRosterMiddleware/readRosterMiddleware.js");
 const scriptMiddleware = require("./lib/scriptMiddleware/scriptMiddleware");
 const getLoginCookies = require("./lib/getLoginCookies");
+const id = require("./lib/id");
 
 app.use(function(req, res, next) {
   res.set({
@@ -39,8 +40,6 @@ app.use(function(req, res, next) {
 });
 
 app.use(cookieParser());
-
-// app.use(credChecker({}));
 
 app.options(/\/.*/, function(req, res) {
   res.status(204).send();
@@ -83,6 +82,8 @@ app.get("/protected-endpoint", function(req, res) {
 });
 
 app.get("/get-cookies", getLoginCookies);
+
+app.get("/id", id);
 
 app.get("/playground", function(req, res, next) {
   let authHeader;
