@@ -4,10 +4,17 @@ from troposphere.awslambda import Environment
 from troposphere.serverless import Function, ApiEvent
 
 t = Template()
+dt = Template()
 
-t.set_version('2010-09-09')
-t.set_transform(['AWS::Serverless-2016-10-31', 'AWS::CodeStar'])
+for template in [t, dt]:  
+  template.set_version('2010-09-09')
+  template.set_transform(['AWS::Serverless-2016-10-31', 'AWS::CodeStar'])
 projectid = t.add_parameter(Parameter(
+  "ProjectId",
+  Description="AWS CodeStar projectID used to associate new resources to team members",
+  Type="String"
+))
+dt.add_parameter(Parameter(
   "ProjectId",
   Description="AWS CodeStar projectID used to associate new resources to team members",
   Type="String"
@@ -24,14 +31,14 @@ def events(path, get, post, options):
       ApiEvent("OptionsEvent", Path=path, Method="options")
   return ev
 def add_function(template, name, path, db_access=False, get=False, post=False,
-  options=False, timeout=None, memory_size=None):
+  options=False, timeout=None, memory_size=None, node_env="production"):
   common_function_args = {
     "Handler": "index.handler",
     "Runtime": "nodejs12.x",
     "CodeUri": "this is not really required, as it is specified in buildspec.yml",
     "Environment": Environment(
       Variables={
-        "NODE_ENV": "production"
+        "NODE_ENV": node_env
       }
     ),
     "Role": ImportValue(
@@ -58,40 +65,50 @@ def add_function(template, name, path, db_access=False, get=False, post=False,
     )
   )
 
-add_function(t, "HelloWorld", path="/", db_access=True, get=True, post=True,
-  options=True)
-add_function(t, "ProtectedEndpoint", path="/protected-endpoint", get=True,
-  post=True, options=True)
-add_function(t, "PublicEndpoint", path="/public-endpoint", get=True,
-  options=True, timeout=5)
-add_function(t, "GetCookies", path="/get-cookies", timeout=30, memory_size=1792,
-  get=True, options=True)
-add_function(t, "Id", path="/id", timeout=30, memory_size=3008,
-  get=True, options=True)
-add_function(t, "Playground", path="/playground", timeout=30, get=True,
-  options=True)
-add_function(t, "Scripts", path="/scripts", timeout=30, memory_size=1792,
-  get=True, options=True)
-add_function(t, "RoomCode", path="/room-code", timeout=40, memory_size=3008,
-  post=True, options=True)
-add_function(t, "JoinSeder", path="/join-seder", timeout=30, memory_size=1792,
-  post=True, options=True)
-add_function(t, "DB", path="/db", timeout=10, get=True, post=True, options=True)
-add_function(t, "Roster", path="/roster", timeout=40, memory_size=3008,
-  get=True, options=True)
-add_function(t, "CloseSeder", path="/close-seder", timeout=40,
-  memory_size=3008, post=True, options=True)
-add_function(t, "Play", path="/play", timeout=5, get=True, post=True,
-  options=True)
-add_function(t, "Assignments", path="/assignments", timeout=60,
-  memory_size=3008, get=True, options=True)
-add_function(t, "SubmitLibs", path="/submit-libs", timeout=40,
-  memory_size=3008, post=True, options=True)
-add_function(t, "ReadRoster", path="/read-roster", timeout=60,
-  memory_size=3008, get=True, options=True)
-add_function(t, "Script", path="/script", timeout=80, memory_size=1792,
-  get=True, options=True)
+for fn in [
+    {"node_env": "production", "template": t},
+    {"node_env": "development", "template": dt}
+  ]:
+  add_function(fn["template"], "HelloWorld", node_env=fn["node_env"], path="/", db_access=True, get=True, post=True,
+    options=True)
+  add_function(fn["template"], "ProtectedEndpoint", node_env=fn["node_env"], path="/protected-endpoint", get=True,
+    post=True, options=True)
+  add_function(fn["template"], "PublicEndpoint", node_env=fn["node_env"], path="/public-endpoint", get=True,
+    options=True, timeout=5)
+  add_function(fn["template"], "GetCookies", node_env=fn["node_env"], path="/get-cookies", timeout=30, memory_size=1792,
+    get=True, options=True)
+  add_function(fn["template"], "Id", node_env=fn["node_env"], path="/id", timeout=30, memory_size=3008,
+    get=True, options=True)
+  add_function(fn["template"], "Playground", node_env=fn["node_env"], path="/playground", timeout=30, get=True,
+    options=True)
+  add_function(fn["template"], "Scripts", node_env=fn["node_env"], path="/scripts", timeout=30, memory_size=1792,
+    get=True, options=True)
+  add_function(fn["template"], "RoomCode", node_env=fn["node_env"], path="/room-code", timeout=40, memory_size=3008,
+    post=True, options=True)
+  add_function(fn["template"], "JoinSeder", node_env=fn["node_env"], path="/join-seder", timeout=30, memory_size=1792,
+    post=True, options=True)
+  add_function(fn["template"], "DB", node_env=fn["node_env"], path="/db", timeout=10, get=True, post=True, options=True)
+  add_function(fn["template"], "Roster", node_env=fn["node_env"], path="/roster", timeout=40, memory_size=3008,
+    get=True, options=True)
+  add_function(fn["template"], "CloseSeder", node_env=fn["node_env"], path="/close-seder", timeout=40,
+    memory_size=3008, post=True, options=True)
+  add_function(fn["template"], "Play", node_env=fn["node_env"], path="/play", timeout=5, get=True, post=True,
+    options=True)
+  add_function(fn["template"], "Assignments", node_env=fn["node_env"], path="/assignments", timeout=60,
+    memory_size=3008, get=True, options=True)
+  add_function(fn["template"], "SubmitLibs", node_env=fn["node_env"], path="/submit-libs", timeout=40,
+    memory_size=3008, post=True, options=True)
+  add_function(fn["template"], "ReadRoster", node_env=fn["node_env"], path="/read-roster", timeout=60,
+    memory_size=3008, get=True, options=True)
+  add_function(fn["template"], "Script", node_env=fn["node_env"], path="/script", timeout=80, memory_size=1792,
+    get=True, options=True)
 
-for line in t.to_yaml().splitlines():
-  if not re.search(r'^\s*CodeUri:', line):
-    print(line)
+with  open("template.yml", "w") as template_yml, \
+      open("dev-template.yml", "w") as dev_template_yml:
+  for line in t.to_yaml().splitlines():
+    if not re.search(r'^\s*CodeUri:', line):
+      template_yml.write(line + "\n")
+  for line in dt.to_yaml().splitlines():
+    if not re.search(r'^\s*CodeUri:', line):
+      dev_template_yml.write(line + "\n")
+
