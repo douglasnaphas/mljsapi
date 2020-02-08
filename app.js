@@ -24,8 +24,6 @@ const getLoginCookies = require("./lib/getLoginCookies");
 const id = require("./lib/id");
 
 app.use(function(req, res, next) {
-  console.log("process.env.NODE_ENV:");
-  console.log(process.env.NODE_ENV);
   res.set({
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin":
