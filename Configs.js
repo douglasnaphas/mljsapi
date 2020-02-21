@@ -32,9 +32,16 @@ class Configs {
   }
 
   static CognitoRedirectURI(protocol, host) {
-    if (!protocol || !host) return "https://api.passover.lol/get-cookies";
-    if (/https?/.test(protocol) && /^localhost(:[0-9]{1,5})?$/.test(host))
+    if (!protocol || !host) {
+      return "https://api.passover.lol/get-cookies";
+      
+    }
+    if (/https?/.test(protocol) && /^api-dev.passover.lol$/.test(host)) {
+      return "https" + "://" + host + "/get-cookies";
+    }
+    if (/https?/.test(protocol) && /^localhost(:[0-9]{1,5})?$/.test(host)) {
       return protocol + "://" + host + "/get-cookies";
+    }
     return "https://api.passover.lol/get-cookies";
   }
 

@@ -46,20 +46,8 @@ app.options(/\/.*/, function(req, res) {
 });
 
 app.get("/", function(req, res) {
-  const dynamodb = new AWS.DynamoDB();
-  const params = {
-    TableName: "seders"
-  };
-  dynamodb.describeTable(params, (err, data) => {
-    if (err) {
-      console.log("***** error occurred describing table");
-      console.log(err, err.stack);
-      res.send({ err: err, stack: err.stack });
-    } else {
-      console.log("###### successfully described table");
-      console.log(data);
-      res.send({ Output: data });
-    }
+  res.send({
+    Output: "Hello World!! "
   });
 });
 

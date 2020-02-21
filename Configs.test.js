@@ -57,6 +57,9 @@ describe("Configs/CognitoRedirectURI", () => {
     ${"http"}  | ${"no-http-allowed"}           | ${defaultRedirectURI}
     ${"https"} | ${"xyz.com"}                   | ${defaultRedirectURI}
     ${"https"} | ${"api.madliberationgame.com"} | ${defaultRedirectURI}
+    ${"https"} | ${"api.passover.lol"}          | ${defaultRedirectURI}
+    ${"https"} | ${"api-dev.passover.lol"}      | ${"https://api-dev.passover.lol/get-cookies"}
+    ${"http"} | ${"api-dev.passover.lol"}       | ${"https://api-dev.passover.lol/get-cookies"}
   `(
     "scheme $scheme localhost $host should return $expected",
     ({ scheme, host, expected }) => {
