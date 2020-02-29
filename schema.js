@@ -6,15 +6,18 @@
  */
 const schema = {
   TABLE_NAME: 'seders',
+  SEPARATOR: '#',
   // key attribute names
   PARTITION_KEY: 'room_code',
   SORT_KEY: 'lib_id',
+  // partition key prefix(es)
+  PKEY_PREFIX_SUB: 'sub-',
   // relating to the compound sort key
-  SEPARATOR: '#',
   SEDER_PREFIX: 'seder',
   PARTICIPANT_PREFIX: 'participant',
   SCRIPT_PREFIX: 'script',
   LIB_PREFIX: 'lib',
+  USERINFO_PREFIX: 'userinfo',
   // indexes
   SCRIPTS_INDEX: 'scripts',
   SCRIPTS_PART_KEY: 'is_script',
@@ -33,7 +36,10 @@ const schema = {
   SESSION_KEY: 'session_key',
   GAME_NAME: 'game_name',
   ASSIGNMENTS: 'assignments',
-  ANSWERS: 'answers'
+  ANSWERS: 'answers',
+  // users
+  USER_NICKNAME: 'user_nickname',
+  USER_EMAIL: 'user_email'
 }
 
 module.exports = schema;
