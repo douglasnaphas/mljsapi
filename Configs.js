@@ -96,6 +96,10 @@ class Configs {
   static libBlacklist() {
     return /[^-A-Za-z ,0-9."'?!/]/g;
   }
+  
+  static roomCodeRetries() {
+    return 50;
+  }
 }
 
 module.exports = Configs;

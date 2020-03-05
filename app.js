@@ -111,7 +111,7 @@ app.use(bodyParser.json());
 app.use(blacklistPostParams);
 
 app.use("/room-code", pathCheck());
-app.post("/room-code", roomCode(AWS, randomStringGenerator));
+app.post("/room-code", roomCode(AWS, randomStringGenerator, Configs));
 
 const joinSederMiddleware = require("./lib/joinSederMiddleware/joinSederMiddleware.js");
 app.post("/join-seder", joinSederMiddleware);
