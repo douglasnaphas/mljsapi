@@ -39,8 +39,7 @@ const schema = {
   ANSWERS: 'answers',
   // users
   USER_NICKNAME: 'user_nickname',
-  USER_EMAIL: 'user_email',
-  IS_USER_INFO: 'is_user_info'
+  USER_EMAIL: 'user_email'
 }
 
 module.exports = schema;
