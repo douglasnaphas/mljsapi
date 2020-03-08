@@ -98,7 +98,7 @@ class Configs {
   }
   
   static roomCodeRetries() {
-    return 50;
+    return 10;
   }
 }
 
