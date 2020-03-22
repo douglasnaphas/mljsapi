@@ -63,12 +63,6 @@ app.get("/public-endpoint", function(req, res) {
   });
 });
 
-app.get("/protected-endpoint", function(req, res) {
-  res.send({
-    Output: "this endpoint is protected"
-  });
-});
-
 app.get("/get-cookies", getLoginCookies);
 
 app.get("/id", id);
@@ -79,8 +73,6 @@ app.get("/playground", function(req, res, next) {
   authHeader = authHeader || "no auth header";
   res.send({ Authorization: authHeader });
 });
-
-app.get("/code", function(req, res) {});
 
 app.get("/scripts", async function(req, res) {
   const params = {

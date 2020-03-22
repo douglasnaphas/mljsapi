@@ -71,8 +71,6 @@ for fn in [
   ]:
   add_function(fn["template"], "HelloWorld", node_env=fn["node_env"], path="/", db_access=True, get=True, post=True,
     options=True)
-  add_function(fn["template"], "ProtectedEndpoint", node_env=fn["node_env"], path="/protected-endpoint", get=True,
-    post=True, options=True)
   add_function(fn["template"], "PublicEndpoint", node_env=fn["node_env"], path="/public-endpoint", get=True,
     options=True, timeout=5)
   add_function(fn["template"], "GetCookies", node_env=fn["node_env"], path="/get-cookies", timeout=30, memory_size=1792,
