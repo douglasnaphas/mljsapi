@@ -68,6 +68,8 @@ app.get("/get-cookies", getLoginCookies);
 
 app.get("/id", id);
 
+app.use(bodyParser.json());
+
 app.use(authenticate);
 
 app.get("/playground", function(req, res, next) {
@@ -100,8 +102,6 @@ app.get("/scripts", async function(req, res) {
   }
   return res.send({ scripts: dbResponse.data });
 });
-
-app.use(bodyParser.json());
 
 app.use(blacklistPostParams);
 
