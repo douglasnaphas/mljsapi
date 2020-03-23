@@ -22,6 +22,7 @@ const readRosterMiddleware = require("./lib/readRosterMiddleware/readRosterMiddl
 const scriptMiddleware = require("./lib/scriptMiddleware/scriptMiddleware");
 const getLoginCookies = require("./lib/getLoginCookies");
 const id = require("./lib/id");
+const authenticate = require("./lib/authenticate");
 
 app.use(function(req, res, next) {
   res.set({
@@ -66,6 +67,8 @@ app.get("/public-endpoint", function(req, res) {
 app.get("/get-cookies", getLoginCookies);
 
 app.get("/id", id);
+
+app.use(authenticate);
 
 app.get("/playground", function(req, res, next) {
   let authHeader;
