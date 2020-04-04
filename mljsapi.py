@@ -101,7 +101,7 @@ for fn in [
   add_function(fn["template"], "Script", node_env=fn["node_env"], path="/script", timeout=80, memory_size=1792,
     get=True, options=True)
   add_function(fn["template"], "Seders", node_env=fn["node_env"], path="/seders", timeout=30, memory_size=3008,
-    post=True, options=True)
+    post=True, get=True, options=True)
 
 with  open("template.yml", "w") as template_yml, \
       open("dev-template.yml", "w") as dev_template_yml:

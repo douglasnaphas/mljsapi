@@ -425,6 +425,11 @@ Resources:
         Variables:
           NODE_ENV: production
       Events:
+        GetEvent:
+          Properties:
+            Method: get
+            Path: /seders
+          Type: Api
         OptionsEvent:
           Properties:
             Method: options

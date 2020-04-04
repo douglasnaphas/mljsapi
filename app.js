@@ -163,6 +163,7 @@ app.get("/play", scriptMiddleware, (req, res) => {
 });
 
 app.post("/seders", seders);
+app.get("/seders", seders);
 
 app.use(send500OnError);
 
