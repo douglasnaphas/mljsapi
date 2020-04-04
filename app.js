@@ -22,6 +22,8 @@ const readRosterMiddleware = require("./lib/readRosterMiddleware/readRosterMiddl
 const scriptMiddleware = require("./lib/scriptMiddleware/scriptMiddleware");
 const getLoginCookies = require("./lib/getLoginCookies");
 const id = require("./lib/id");
+const authenticate = require("./lib/authenticate");
+const send500OnError = require("./lib/send500OnError");
 
 app.use(function(req, res, next) {
   res.set({
@@ -67,6 +69,10 @@ app.get("/get-cookies", getLoginCookies);
 
 app.get("/id", id);
 
+app.use(bodyParser.json());
+
+app.use(authenticate);
+
 app.get("/playground", function(req, res, next) {
   let authHeader;
   authHeader = req.get("authorization");
@@ -97,8 +103,6 @@ app.get("/scripts", async function(req, res) {
   }
   return res.send({ scripts: dbResponse.data });
 });
-
-app.use(bodyParser.json());
 
 app.use(blacklistPostParams);
 
@@ -156,6 +160,8 @@ app.post("/play", readRosterMiddleware, (req, res) => {
 app.get("/play", scriptMiddleware, (req, res) => {
   res.send(res.locals.script);
 });
+
+app.use(send500OnError);
 
 // Export your Express configuration so that it can be consumed by the Lambda handler
 module.exports = app;
