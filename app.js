@@ -24,6 +24,7 @@ const getLoginCookies = require("./lib/getLoginCookies");
 const id = require("./lib/id");
 const authenticate = require("./lib/authenticate");
 const send500OnError = require("./lib/send500OnError");
+const seders = require("./lib/seders");
 
 app.use(function(req, res, next) {
   res.set({
@@ -160,6 +161,8 @@ app.post("/play", readRosterMiddleware, (req, res) => {
 app.get("/play", scriptMiddleware, (req, res) => {
   res.send(res.locals.script);
 });
+
+app.post("/seders", seders);
 
 app.use(send500OnError);
 
