@@ -311,6 +311,33 @@ Resources:
       Runtime: nodejs12.x
       Timeout: 60
     Type: AWS::Serverless::Function
+  Rejoin:
+    Properties:
+      Environment:
+        Variables:
+          NODE_ENV: production
+      Events:
+        OptionsEvent:
+          Properties:
+            Method: options
+            Path: /rejoin
+          Type: Api
+        PostEvent:
+          Properties:
+            Method: post
+            Path: /rejoin
+          Type: Api
+      Handler: index.handler
+      MemorySize: 3008
+      Role: !ImportValue
+        Fn::Join:
+          - '-'
+          - - !Ref 'ProjectId'
+            - !Ref 'AWS::Region'
+            - LambdaTrustRole
+      Runtime: nodejs12.x
+      Timeout: 30
+    Type: AWS::Serverless::Function
   RoomCode:
     Properties:
       Environment:

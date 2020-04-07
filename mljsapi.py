@@ -106,6 +106,8 @@ for fn in [
     get=True, options=True)
   add_function(fn["template"], "SedersJoined", node_env=fn["node_env"], path="/seders-joined", timeout=30, memory_size=3008,
     get=True, options=True)
+  add_function(fn["template"], "Rejoin", node_env=fn["node_env"], path="/rejoin", timeout=30, memory_size=3008,
+    post=True, options=True)
 
 with  open("template.yml", "w") as template_yml, \
       open("dev-template.yml", "w") as dev_template_yml:
