@@ -451,6 +451,60 @@ Resources:
       Runtime: nodejs12.x
       Timeout: 30
     Type: AWS::Serverless::Function
+  SedersJoined:
+    Properties:
+      Environment:
+        Variables:
+          NODE_ENV: development
+      Events:
+        GetEvent:
+          Properties:
+            Method: get
+            Path: /seders-joined
+          Type: Api
+        OptionsEvent:
+          Properties:
+            Method: options
+            Path: /seders-joined
+          Type: Api
+      Handler: index.handler
+      MemorySize: 3008
+      Role: !ImportValue
+        Fn::Join:
+          - '-'
+          - - !Ref 'ProjectId'
+            - !Ref 'AWS::Region'
+            - LambdaTrustRole
+      Runtime: nodejs12.x
+      Timeout: 30
+    Type: AWS::Serverless::Function
+  SedersStarted:
+    Properties:
+      Environment:
+        Variables:
+          NODE_ENV: development
+      Events:
+        GetEvent:
+          Properties:
+            Method: get
+            Path: /seders-started
+          Type: Api
+        OptionsEvent:
+          Properties:
+            Method: options
+            Path: /seders-started
+          Type: Api
+      Handler: index.handler
+      MemorySize: 3008
+      Role: !ImportValue
+        Fn::Join:
+          - '-'
+          - - !Ref 'ProjectId'
+            - !Ref 'AWS::Region'
+            - LambdaTrustRole
+      Runtime: nodejs12.x
+      Timeout: 30
+    Type: AWS::Serverless::Function
   SubmitLibs:
     Properties:
       Environment:

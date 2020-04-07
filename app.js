@@ -25,6 +25,7 @@ const id = require("./lib/id");
 const authenticate = require("./lib/authenticate");
 const send500OnError = require("./lib/send500OnError");
 const seders = require("./lib/seders");
+const sedersJoined = require("./lib/sedersJoined");
 
 app.use(function(req, res, next) {
   res.set({
@@ -164,6 +165,8 @@ app.get("/play", scriptMiddleware, (req, res) => {
 
 app.post("/seders", seders);
 app.get("/seders", seders);
+app.get("/seders-started", seders);
+app.get("/seders-joined", sedersJoined);
 
 app.use(send500OnError);
 
