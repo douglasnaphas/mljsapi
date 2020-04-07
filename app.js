@@ -26,6 +26,7 @@ const authenticate = require("./lib/authenticate");
 const send500OnError = require("./lib/send500OnError");
 const seders = require("./lib/seders");
 const sedersJoined = require("./lib/sedersJoined");
+const rejoin = require("./lib/rejoin");
 
 app.use(function(req, res, next) {
   res.set({
@@ -107,6 +108,8 @@ app.get("/scripts", async function(req, res) {
 });
 
 app.use(blacklistPostParams);
+
+app.post("/rejoin", rejoin);
 
 app.use("/room-code", pathCheck());
 app.post("/room-code", roomCode(AWS, randomStringGenerator, Configs));
