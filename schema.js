@@ -22,7 +22,8 @@ const schema = {
   SCRIPTS_INDEX: 'scripts',
   SCRIPTS_PART_KEY: 'is_script',
   EMAIL_NICKNAME_INDEX: 'user_email-nickname-index', // gets users
-  EMAIL_PATH_INDEX: 'user_email-path-TO-all-index',  // gets seders
+  EMAIL_PATH_INDEX: 'user_email-path-TO-all-index', // gets seders
+  EMAIL_GAME_NAME_INDEX: 'user_email-game_name-index', // gets participants
   // attribute names
   SCRIPT_VERSION: 'script_version',
   // scripts
