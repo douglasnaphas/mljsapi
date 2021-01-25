@@ -29,3 +29,18 @@ For example:
 ## CloudFormation
 
 `mljsapi.py`, which uses [troposphere](https://github.com/cloudtools/troposphere), should generate `template.yml`. `diff <(python mljsapi.py) template.yml` should exit 0. Eventually `template.yml` can be generated during the build process.
+
+### Generating template.yml from mljsapi.py
+#### Install pyenv
+Instructions [here](https://github.com/pyenv/pyenv#installation).
+
+I do it by:
+    1. Running `curl https://pyenv.run | bash`.
+    2. Getting `pyenv` on the PATH, first by finding the `pyenv` executable.
+       This was given in the installation output.
+       If it's not in the PATH, I make a symlink from `/usr/local/bin`, for
+       example with `sudo ln -s ~/.pyenv/bin/pyenv /usr/local/bin/pyenv`.
+    3. Getting `pyenv init -` into `.bashrc` or equivalent, for example by
+       using [my shared configs](https://github.com/douglasnaphas/configs/blob/master/.bashrc#L189-L192).
+
+#### 
