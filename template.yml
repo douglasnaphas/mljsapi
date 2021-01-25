@@ -9,6 +9,7 @@ Resources:
       Environment:
         Variables:
           NODE_ENV: production
+          TABLE_NAME: seders
       Events:
         GetEvent:
           Properties:
@@ -36,6 +37,7 @@ Resources:
       Environment:
         Variables:
           NODE_ENV: production
+          TABLE_NAME: seders
       Events:
         OptionsEvent:
           Properties:
@@ -63,6 +65,7 @@ Resources:
       Environment:
         Variables:
           NODE_ENV: production
+          TABLE_NAME: seders
       Events:
         GetEvent:
           Properties:
@@ -94,6 +97,7 @@ Resources:
       Environment:
         Variables:
           NODE_ENV: production
+          TABLE_NAME: seders
       Events:
         GetEvent:
           Properties:
@@ -121,6 +125,7 @@ Resources:
       Environment:
         Variables:
           NODE_ENV: production
+          TABLE_NAME: seders
       Events:
         GetEvent:
           Properties:
@@ -152,6 +157,7 @@ Resources:
       Environment:
         Variables:
           NODE_ENV: production
+          TABLE_NAME: seders
       Events:
         GetEvent:
           Properties:
@@ -179,6 +185,7 @@ Resources:
       Environment:
         Variables:
           NODE_ENV: production
+          TABLE_NAME: seders
       Events:
         OptionsEvent:
           Properties:
@@ -206,6 +213,7 @@ Resources:
       Environment:
         Variables:
           NODE_ENV: production
+          TABLE_NAME: seders
       Events:
         GetEvent:
           Properties:
@@ -237,6 +245,7 @@ Resources:
       Environment:
         Variables:
           NODE_ENV: production
+          TABLE_NAME: seders
       Events:
         GetEvent:
           Properties:
@@ -263,6 +272,7 @@ Resources:
       Environment:
         Variables:
           NODE_ENV: production
+          TABLE_NAME: seders
       Events:
         GetEvent:
           Properties:
@@ -289,6 +299,7 @@ Resources:
       Environment:
         Variables:
           NODE_ENV: production
+          TABLE_NAME: seders
       Events:
         GetEvent:
           Properties:
@@ -316,6 +327,7 @@ Resources:
       Environment:
         Variables:
           NODE_ENV: production
+          TABLE_NAME: seders
       Events:
         OptionsEvent:
           Properties:
@@ -343,6 +355,7 @@ Resources:
       Environment:
         Variables:
           NODE_ENV: production
+          TABLE_NAME: seders
       Events:
         OptionsEvent:
           Properties:
@@ -370,6 +383,7 @@ Resources:
       Environment:
         Variables:
           NODE_ENV: production
+          TABLE_NAME: seders
       Events:
         GetEvent:
           Properties:
@@ -397,6 +411,7 @@ Resources:
       Environment:
         Variables:
           NODE_ENV: production
+          TABLE_NAME: seders
       Events:
         GetEvent:
           Properties:
@@ -424,6 +439,7 @@ Resources:
       Environment:
         Variables:
           NODE_ENV: production
+          TABLE_NAME: seders
       Events:
         GetEvent:
           Properties:
@@ -451,6 +467,7 @@ Resources:
       Environment:
         Variables:
           NODE_ENV: production
+          TABLE_NAME: seders
       Events:
         GetEvent:
           Properties:
@@ -483,6 +500,7 @@ Resources:
       Environment:
         Variables:
           NODE_ENV: production
+          TABLE_NAME: seders
       Events:
         GetEvent:
           Properties:
@@ -510,6 +528,7 @@ Resources:
       Environment:
         Variables:
           NODE_ENV: production
+          TABLE_NAME: seders
       Events:
         GetEvent:
           Properties:
@@ -537,6 +556,7 @@ Resources:
       Environment:
         Variables:
           NODE_ENV: production
+          TABLE_NAME: seders
       Events:
         OptionsEvent:
           Properties:
