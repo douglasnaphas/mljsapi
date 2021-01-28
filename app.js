@@ -28,7 +28,7 @@ const seders = require("./lib/seders");
 const sedersJoined = require("./lib/sedersJoined");
 const rejoin = require("./lib/rejoin");
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   res.set({
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin":
@@ -39,62 +39,23 @@ app.use(function(req, res, next) {
         ? req.get("origin")
         : Configs.allowedOrigin(req.get("origin")),
     "Access-Control-Allow-Headers": "Authorization, Content-Type",
-    "Access-Control-Allow-Credentials": "true"
+    "Access-Control-Allow-Credentials": "true",
   });
   next();
 });
 
-app.use(cookieParser());
-
-app.options(/\/.*/, function(req, res) {
-  res.status(204).send();
-});
-
-app.get("/", function(req, res) {
-  res.send({
-    Output: "Hello World!! "
-  });
-});
-
-app.post("/", function(req, res) {
-  res.send({
-    Output: "Hello World!! "
-  });
-});
-
-app.get("/public-endpoint", function(req, res) {
-  res.send({
-    Output: "this endpoint is public"
-  });
-});
-
-app.get("/get-cookies", getLoginCookies);
-
-app.get("/id", id);
-
-app.use(bodyParser.json());
-
-app.use(authenticate);
-
-app.get("/playground", function(req, res, next) {
-  let authHeader;
-  authHeader = req.get("authorization");
-  authHeader = authHeader || "no auth header";
-  res.send({ Authorization: authHeader });
-});
-
-app.get("/scripts", async function(req, res) {
+app.get("/scripts", async function (req, res) {
   console.log("in /scripts 1");
   const params = {
     TableName: schema.TABLE_NAME,
     IndexName: schema.SCRIPTS_INDEX,
     ExpressionAttributeNames: {
-      "#IS": schema.SCRIPTS_PART_KEY
+      "#IS": schema.SCRIPTS_PART_KEY,
     },
     ExpressionAttributeValues: {
-      ":is": 1
+      ":is": 1,
     },
-    KeyConditionExpression: "#IS = :is"
+    KeyConditionExpression: "#IS = :is",
   };
   const dynamodb = new AWS.DynamoDB.DocumentClient();
   const dbResponse = await new Promise((resolve, reject) => {
@@ -106,6 +67,45 @@ app.get("/scripts", async function(req, res) {
     return res.status(500).send({ err: dbResponse.err });
   }
   return res.send({ scripts: dbResponse.data });
+});
+
+app.use(cookieParser());
+
+app.options(/\/.*/, function (req, res) {
+  res.status(204).send();
+});
+
+app.get("/", function (req, res) {
+  res.send({
+    Output: "Hello World!! ",
+  });
+});
+
+app.post("/", function (req, res) {
+  res.send({
+    Output: "Hello World!! ",
+  });
+});
+
+app.get("/public-endpoint", function (req, res) {
+  res.send({
+    Output: "this endpoint is public",
+  });
+});
+
+app.get("/get-cookies", getLoginCookies);
+
+app.get("/id", id);
+
+app.use(bodyParser.json());
+
+app.use(authenticate);
+
+app.get("/playground", function (req, res, next) {
+  let authHeader;
+  authHeader = req.get("authorization");
+  authHeader = authHeader || "no auth header";
+  res.send({ Authorization: authHeader });
 });
 
 app.use(blacklistPostParams);
