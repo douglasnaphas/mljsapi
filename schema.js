@@ -5,7 +5,7 @@
  * See https://github.com/douglasnaphas/madliberation/wiki/Database-schema.
  */
 const schema = {
-  TABLE_NAME: 'seders',
+  TABLE_NAME: process && process.env && process.env['TABLE_NAME'],
   SEPARATOR: '#',
   // key attribute names
   PARTITION_KEY: 'room_code',

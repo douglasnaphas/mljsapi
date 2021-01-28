@@ -38,7 +38,8 @@ def add_function(template, name, path, db_access=False, get=False, post=False,
     "CodeUri": "this is not really required, as it is specified in buildspec.yml",
     "Environment": Environment(
       Variables={
-        "NODE_ENV": node_env
+        "NODE_ENV": node_env,
+        "TABLE_NAME": "seders"
       }
     ),
     "Role": ImportValue(
