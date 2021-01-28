@@ -39,7 +39,12 @@ def add_function(template, name, path, db_access=False, get=False, post=False,
     "Environment": Environment(
       Variables={
         "NODE_ENV": node_env,
-        "TABLE_NAME": "seders"
+        "TABLE_NAME": "seders",
+        "JWKS_URL": "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_Yn89yKizn/.well-known/jwks.json",
+        "COGNITO_CLIENT_ID": "25h54vd0cundt7iaeon1rn8a02",
+        "COGNITO_USER_POOL_ID": "us-east-1_Yn89yKizn",
+        "COGNITO_TOKEN_ENDPOINT_URL": "https://madliberationfederated.auth.us-east-1.amazoncognito.com/oauth2/token"
+
       }
     ),
     "Role": ImportValue(
