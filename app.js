@@ -84,6 +84,7 @@ app.get("/playground", function(req, res, next) {
 });
 
 app.get("/scripts", async function(req, res) {
+  console.log("in /scripts 1");
   const params = {
     TableName: schema.TABLE_NAME,
     IndexName: schema.SCRIPTS_INDEX,
