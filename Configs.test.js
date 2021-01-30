@@ -1,5 +1,5 @@
 /* globals expect */
-const Configs = require("./Configs");
+let Configs = require("./Configs");
 describe("Configs/allowedOrigin", () => {
   const defaultAllowedOrigin = "https://madliberationgame.com";
   test(defaultAllowedOrigin, () => {
@@ -29,6 +29,16 @@ describe("Configs/allowedOrigin", () => {
   });
 });
 describe("Configs/CognitoRedirectURI", () => {
+  const OLD_ENV = process.env;
+  beforeEach(() => {
+    jest.resetModules();
+    process.env.COGNITO_DEFAULT_REDIRECT_URI =
+      "https://api.passover.lol/get-cookies";
+    Configs = require("./Configs");
+  });
+  afterEach(() => {
+    process.env = { ...OLD_ENV };
+  });
   const defaultRedirectURI = "https://api.passover.lol/get-cookies";
   test("no host or protocol, should be https://api.passover.lol/get-cookies", () => {
     expect(Configs.CognitoRedirectURI()).toEqual(defaultRedirectURI);
@@ -59,9 +69,9 @@ describe("Configs/CognitoRedirectURI", () => {
     ${"https"} | ${"api.madliberationgame.com"} | ${defaultRedirectURI}
     ${"https"} | ${"api.passover.lol"}          | ${defaultRedirectURI}
     ${"https"} | ${"api-dev.passover.lol"}      | ${"https://api-dev.passover.lol/get-cookies"}
-    ${"http"} | ${"api-dev.passover.lol"}       | ${"https://api-dev.passover.lol/get-cookies"}
+    ${"http"}  | ${"api-dev.passover.lol"}      | ${"https://api-dev.passover.lol/get-cookies"}
   `(
-    "scheme $scheme localhost $host should return $expected",
+    "scheme $scheme host $host should return $expected",
     ({ scheme, host, expected }) => {
       expect(Configs.CognitoRedirectURI(scheme, host)).toEqual(expected);
     }
