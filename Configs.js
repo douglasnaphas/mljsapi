@@ -27,7 +27,9 @@ class Configs {
 
   static CognitoRedirectURI(protocol, host) {
     if (!protocol || !host) {
-      return "https://api.passover.lol/get-cookies";
+      return (
+        process && process.env && process.env["COGNITO_DEFAULT_REDIRECT_URI"]
+      );
     }
     if (/https?/.test(protocol) && /^api-dev.passover.lol$/.test(host)) {
       return "https" + "://" + host + "/get-cookies";
@@ -35,7 +37,9 @@ class Configs {
     if (/https?/.test(protocol) && /^localhost(:[0-9]{1,5})?$/.test(host)) {
       return protocol + "://" + host + "/get-cookies";
     }
-    return "https://api.passover.lol/get-cookies";
+    return (
+      process && process.env && process.env["COGNITO_DEFAULT_REDIRECT_URI"]
+    );
   }
 
   /**
