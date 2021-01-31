@@ -26,6 +26,9 @@ class Configs {
   }
 
   static CognitoRedirectURI(protocol, host) {
+    // TODO: How about just always using protocol and host from the request headers?
+    // That way the backend won't have to figure out what its URL is.
+    // Cognito will check to ensure it's an allowable redirect URI anyway
     if (!protocol || !host) {
       return (
         process && process.env && process.env["COGNITO_DEFAULT_REDIRECT_URI"]
