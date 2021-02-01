@@ -28,6 +28,14 @@ const seders = require("./lib/seders");
 const sedersJoined = require("./lib/sedersJoined");
 const rejoin = require("./lib/rejoin");
 
+app.get("/relative-redirect", (req, res) => {
+  return res.redirect("/redirected-here");
+});
+
+app.get("/redirected-here", (req, res) => {
+  return res.send({ Output: "redirected to here" });
+});
+
 app.use(function (req, res, next) {
   res.set({
     "Content-Type": "application/json",
