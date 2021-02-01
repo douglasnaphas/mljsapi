@@ -32,7 +32,7 @@ app.get("/relative-redirect", (req, res) => {
   return res.redirect("/redirected-here");
 });
 
-app.get("/redirected-here", (req, res) => {
+app.get("/prod/redirected-here", (req, res) => {
   return res.send({ Output: "redirected to here" });
 });
 
