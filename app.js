@@ -28,12 +28,20 @@ const seders = require("./lib/seders");
 const sedersJoined = require("./lib/sedersJoined");
 const rejoin = require("./lib/rejoin");
 
-app.get("/relative-redirect", (req, res) => {
-  return res.redirect("/redirected-here");
+app.get(/\/relative-redirect(-2)?/, (req, res) => {
+  return res.redirect("/prod/redirected-here");
 });
 
-app.get("/prod/redirected-here", (req, res) => {
+app.get("/rr-3", (req, res) => {
+  return res.redirect("/prod/redirected-here");
+});
+
+app.get("/redirected-here", (req, res) => {
   return res.send({ Output: "redirected to here" });
+});
+
+app.get("/canary-1", (req, res) => {
+  return res.send({ Output: "canary-1" });
 });
 
 app.use(function (req, res, next) {
