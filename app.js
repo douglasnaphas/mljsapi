@@ -27,6 +27,9 @@ const send500OnError = require("./lib/send500OnError");
 const seders = require("./lib/seders");
 const sedersJoined = require("./lib/sedersJoined");
 const rejoin = require("./lib/rejoin");
+const login = require("./lib/login/login");
+
+app.get("/login", login);
 
 app.use(function (req, res, next) {
   res.set({
