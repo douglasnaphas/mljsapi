@@ -9,6 +9,10 @@ class Configs {
     return "https://madliberationgame.com";
   }
 
+  static idpUrl() {
+    return process.env.IDP_URL;
+  }
+
   static jwksUrl() {
     return (
       "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_Yn89yKizn/." +
@@ -34,7 +38,6 @@ class Configs {
   static CognitoRedirectURI(protocol, host) {
     if (!protocol || !host) {
       return "https://api.passover.lol/get-cookies";
-      
     }
     if (/https?/.test(protocol) && /^api-dev.passover.lol$/.test(host)) {
       return "https" + "://" + host + "/get-cookies";
@@ -96,7 +99,7 @@ class Configs {
   static libBlacklist() {
     return /[^-A-Za-z ,0-9."'?!/]/g;
   }
-  
+
   static roomCodeRetries() {
     return 10;
   }
