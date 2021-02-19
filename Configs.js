@@ -14,38 +14,26 @@ class Configs {
   }
 
   static jwksUrl() {
-    return (
-      "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_Yn89yKizn/." +
-      "well-known/jwks.json"
-    );
+    return process.env.JWKS_URL;
   }
 
   static CognitoClientID() {
-    return "25h54vd0cundt7iaeon1rn8a02";
+    return process.env.USER_POOL_CLIENT_ID;
   }
 
   static CognitoUserPoolID() {
-    return "us-east-1_Yn89yKizn";
+    return process.env.USER_POOL_ID;
   }
 
   static CognitoTokenEndpointURL() {
     return (
-      "https://madliberationfederated.auth.us-east-1.amazoncognito.com/" +
-      "oauth2/token"
+      `https://${process.env.USER_POOL_DOMAIN}.auth.${process.env.REGION}` +
+      `.amazoncognito.com/oauth2/token`
     );
   }
 
   static CognitoRedirectURI(protocol, host) {
-    if (!protocol || !host) {
-      return "https://api.passover.lol/get-cookies";
-    }
-    if (/https?/.test(protocol) && /^api-dev.passover.lol$/.test(host)) {
-      return "https" + "://" + host + "/get-cookies";
-    }
-    if (/https?/.test(protocol) && /^localhost(:[0-9]{1,5})?$/.test(host)) {
-      return protocol + "://" + host + "/get-cookies";
-    }
-    return "https://api.passover.lol/get-cookies";
+    return process.env.REDIRECT_URI;
   }
 
   /**
