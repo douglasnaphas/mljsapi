@@ -1,5 +1,5 @@
 const bucket = {
-  Bucket: 'madliberation-scripts',
-  path2key: path => path.replace(/^madliberation-scripts[/]/, '') + '.json'
+  Bucket: (path) => path.split("/")[0],
+  path2key: (path) => path.split("/")[1] + ".json",
 };
 module.exports = bucket;
