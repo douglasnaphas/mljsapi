@@ -1,14 +1,4 @@
 class Configs {
-  static allowedOrigin(origin) {
-    if (/^https:\/\/([^\/]+[.])?madliberationgame.com$/.test(origin)) {
-      return origin;
-    }
-    if (/^https:\/\/([^\/]+[.])?passover.lol$/.test(origin)) {
-      return origin;
-    }
-    return "https://madliberationgame.com";
-  }
-
   static idpUrl() {
     return process.env.IDP_URL;
   }
