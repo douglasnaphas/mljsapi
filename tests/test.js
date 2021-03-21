@@ -1,51 +1,34 @@
 "use strict";
 
 const supertest = require("supertest");
-const unit = require("unit.js");
 const app = require("../app.js");
 
-const request = supertest(app);
-
-describe("Tests app", function () {
-  it.skip("verifies get", function (done) {
-    request
-      .get("/")
-      .expect(200)
-      .end(function (err, result) {
-        unit.string(result.body.Output).contains("Hello");
-        unit
-          .value(result)
-          .hasHeader("content-type", "application/json; charset=utf-8");
-        done(err);
-      });
-  });
-  it("verifies post", function (done) {
-    request
+describe("app", function () {
+  it("test / (POST)", (done) => {
+    supertest(app)
       .post("/")
-      .expect(200)
-      .end(function (err, result) {
-        unit.string(result.body.Output).contains("Hello");
-        unit
-          .value(result)
-          .hasHeader("content-type", "application/json; charset=utf-8");
-        done(err);
+      .then((response) => {
+        expect(response.statusCode).toBe(200);
+        expect(response.body).toBeTruthy();
+        expect(response.body.Output).toBeTruthy();
+        expect(response.body.Output).toEqual("Hello World!! ");
+        done();
       });
   });
-  it("test canary", function (done) {
-    request
+  it("test canary", (done) => {
+    supertest(app)
       .get("/public-endpoint")
-      .expect(200)
-      .end(function (err, result) {
-        unit.string(result.body.Output).contains("this endpoint is public");
-        done(err);
+      .then((response) => {
+        expect(response.statusCode).toBe(200);
+        done();
       });
   });
   it("test redirect from /login", function (done) {
-    request
+    supertest(app)
       .get("/login")
-      .expect(301)
-      .end(function (err, result) {
-        done(err);
+      .then((response) => {
+        expect(response.statusCode).toBe(301);
+        done();
       });
   });
 });
